@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://carlos-miguel-sandrino-portfolio.vercel.app
+
+# Sitemaps
+Sitemap: https://carlos-miguel-sandrino-portfolio.vercel.app/sitemap.xml
