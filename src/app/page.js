@@ -9,7 +9,7 @@ export default function Home() {
   return (
     <main className="flex flex-col items-center justify-center min-h-screen bg-black text-white px-6 text-center">
       <Reveal>
-        <h1 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 bg-clip-text text-transparent animate-pulse drop-shadow-[0_0_10px_rgba(147,51,234,0.6)]">
+        <h1 className="text-5xl md:text-6xl font-bold bg-linear-to-r from-blue-400 via-purple-500 to-pink-500 bg-clip-text text-transparent animate-pulse drop-shadow-[0_0_10px_rgba(147,51,234,0.6)]">
           Hi, I&apos;m{" "}
           <span className="font-extrabold text-white drop-shadow-[0_0_10px_rgba(56,189,248,0.6)]">
             Carlos Miguel Sandrino
@@ -35,7 +35,7 @@ export default function Home() {
             download
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.95 }}
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-gradient-to-r from-blue-500 via-purple-600 to-pink-500 text-white font-semibold shadow-lg hover:shadow-[0_0_20px_rgba(147,51,234,0.8)] transition-all"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-linear-to-r from-blue-500 via-purple-600 to-pink-500 text-white font-semibold shadow-lg hover:shadow-[0_0_20px_rgba(147,51,234,0.8)] transition-all"
           >
             <FaDownload className="text-lg" />
             Download CV

@@ -16,14 +16,14 @@ export default function Contact() {
       <div  />
 
       <Reveal>
-        <h1 className="text-4xl md:text-5xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-cyan-300 to-blue-500">
+        <h1 className="text-4xl md:text-5xl font-bold mb-6 text-transparent bg-clip-text bg-blue-500">
           Contact Me
         </h1>
       </Reveal>
 
       {/* Animated underline */}
       <Reveal delay={0.2}>
-        <div className="w-24 h-1 mx-auto mb-10 bg-gradient-to-r from-blue-500 via-cyan-400 to-blue-500 rounded-full animate-pulse"></div>
+        <div className="w-24 h-1 mx-auto mb-10 bg-linear-to-r from-blue-500 via-cyan-400 to-blue-500 rounded-full animate-pulse"></div>
       </Reveal>
 
       <Reveal delay={0.3}>
@@ -49,7 +49,7 @@ export default function Contact() {
             href="https://github.com/Crl0sDEV"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-5xl hover:text-white transition transform hover:scale-125 drop-shadow-[0_0_15px_rgba(255,255,255,0.7)] animate-float delay-[200ms]"
+            className="text-5xl hover:text-white transition transform hover:scale-125 drop-shadow-[0_0_15px_rgba(255,255,255,0.7)] animate-float delay-200"
             title="GitHub"
           >
             <FaGithub />
@@ -60,7 +60,7 @@ export default function Contact() {
             href="https://www.linkedin.com/in/sandrino-carlos-miguel"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-5xl hover:text-blue-500 transition transform hover:scale-125 drop-shadow-[0_0_15px_rgba(59,130,246,0.7)] animate-float delay-[400ms]"
+            className="text-5xl hover:text-blue-500 transition transform hover:scale-125 drop-shadow-[0_0_15px_rgba(59,130,246,0.7)] animate-float delay-400"
             title="LinkedIn"
           >
             <FaLinkedin />
@@ -71,7 +71,7 @@ export default function Contact() {
             href="https://www.facebook.com/KreizzyCarl"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-5xl hover:text-blue-600 transition transform hover:scale-125 drop-shadow-[0_0_15px_rgba(37,99,235,0.7)] animate-float delay-[600ms]"
+            className="text-5xl hover:text-blue-600 transition transform hover:scale-125 drop-shadow-[0_0_15px_rgba(37,99,235,0.7)] animate-float delay-600"
             title="Facebook"
           >
             <FaFacebook />
@@ -82,7 +82,7 @@ export default function Contact() {
             href="https://www.instagram.com/crls_mgx"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-5xl hover:text-pink-500 transition transform hover:scale-125 drop-shadow-[0_0_15px_rgba(236,72,153,0.7)] animate-float delay-[800ms]"
+            className="text-5xl hover:text-pink-500 transition transform hover:scale-125 drop-shadow-[0_0_15px_rgba(236,72,153,0.7)] animate-float delay-800"
             title="Instagram"
           >
             <FaInstagram />
