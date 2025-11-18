@@ -6,6 +6,7 @@ export const metadata = {
   title: "Carlos Miguel Sandrino | Web Developer Portfolio",
   description:
     "Portfolio of Carlos Miguel Sandrino – a web developer specializing in Next.js, Tailwind CSS, React, and Supabase.",
+
   keywords: [
     "Carlos Miguel Sandrino",
     "Carlos Miguel I. Sandrino",
@@ -13,9 +14,16 @@ export const metadata = {
     "Next.js Developer",
     "Full-stack Developer",
     "React Developer",
-    "Portfolio"
+    "Portfolio",
   ],
+
   authors: [{ name: "Carlos Miguel Sandrino" }],
+
+  metadataBase: new URL("https://carlos-miguel-sandrino-portfolio.vercel.app"),
+
+  alternates: {
+    canonical: "/",
+  },
 
   openGraph: {
     title: "Carlos Miguel Sandrino | Web Developer Portfolio",
@@ -23,6 +31,8 @@ export const metadata = {
       "Explore projects and skills of Carlos Miguel Sandrino, a modern web developer building responsive and optimized web applications.",
     url: "https://carlos-miguel-sandrino-portfolio.vercel.app",
     siteName: "Carlos Miguel Sandrino Portfolio",
+    locale: "en_US",
+    type: "website",
     images: [
       {
         url: "/og-image.png",
@@ -30,8 +40,6 @@ export const metadata = {
         height: 630,
       },
     ],
-    locale: "en_US",
-    type: "website",
   },
 
   twitter: {
@@ -46,6 +54,14 @@ export const metadata = {
     index: true,
     follow: true,
   },
+
+  icons: {
+    icon: "/favicon.ico",
+    shortcut: "/favicon.ico",
+    apple: "/apple-touch-icon.png",
+  },
+
+  manifest: "/site.webmanifest",
 };
 
 export default function RootLayout({ children }) {
@@ -53,7 +69,18 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <head>
         {/* GOOGLE SITE VERIFICATION */}
-        <meta name="google-site-verification" content="XrhjcO-Xcvf0l4TVmWp7WdXGEOQ_Cs3v_BW7z3OYV6I" />
+        <meta
+          name="google-site-verification"
+          content="XrhjcO-Xcvf0l4TVmWp7WdXGEOQ_Cs3v_BW7z3OYV6I"
+        />
+
+        {/* THEME COLOR FOR MOBILE BROWSERS */}
+        <meta name="theme-color" content="#000000" />
+
+        {/* FAVICON (for extra safety even though Next.js auto-adds based on metadata) */}
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
       </head>
 
       <body className="bg-black text-white font-montserrat">
