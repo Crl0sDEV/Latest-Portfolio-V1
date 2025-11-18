@@ -25,7 +25,7 @@ export const metadata = {
     siteName: "Carlos Miguel Sandrino Portfolio",
     images: [
       {
-        url: "/og-image.png", // optional — gumawa ka later
+        url: "/og-image.png",
         width: 1200,
         height: 630,
       },
