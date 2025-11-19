@@ -26,7 +26,11 @@ body {
 }
 
 html {
-  data-scroll-behavior: smooth;
+  scroll-behavior: smooth;
+}
+
+html, body {
+  overflow-x: hidden;
 }
 
 @layer utilities {
