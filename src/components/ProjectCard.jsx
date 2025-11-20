@@ -15,11 +15,7 @@ export default function ProjectCard({ project }) {
     >
       <h2 className="text-xl font-semibold mb-2">{project.title}</h2>
       <p className="text-gray-400 mb-4">{project.description}</p>
-      <a
-        href={project.link}
-        target="_blank"
-        className="text-blue-400 hover:underline"
-      >
+      <a href={project.link} target="_blank" className="text-blue-400 hover:underline">
         View Project →
       </a>
     </motion.div>
