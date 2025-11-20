@@ -1,5 +1,3 @@
-"use client";
-
 import Reveal from "../../components/Reveal";
 import ProjectCard from "../../components/ProjectCard";
 import { motion } from "framer-motion";
