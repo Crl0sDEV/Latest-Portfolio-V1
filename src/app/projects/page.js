@@ -5,6 +5,11 @@ import ProjectCard from "../../components/ProjectCard";
 import { motion } from "framer-motion";
 import { FaTools } from "react-icons/fa";
 
+export const metadata = {
+  title: "Projects | Carlos Miguel Sandrino",
+  description: "See all projects developed by Carlos Miguel Sandrino.",
+};
+
 export default function Projects() {
   const projects = [
     {

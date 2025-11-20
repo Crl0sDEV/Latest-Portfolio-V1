@@ -9,6 +9,11 @@ import {
   FaInstagram,
 } from "react-icons/fa";
 
+export const metadata = {
+  title: "Contact Me | Carlos Miguel Sandrino",
+  description: "Get in touch with Carlos Miguel Sandrino for collaborations.",
+};
+
 export default function Contact() {
   return (
     <section className="relative max-w-5xl mx-auto py-28 px-6 text-center overflow-hidden">

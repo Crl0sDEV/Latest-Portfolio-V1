@@ -25,6 +25,11 @@ import {
 } from "react-icons/si";
 import { VscCode } from "react-icons/vsc";
 
+export const metadata = {
+  title: "Skills | Carlos Miguel Sandrino",
+  description: "Technologies and tools used by Carlos Miguel Sandrino.",
+};
+
 export default function About() {
   return (
     <section className="max-w-5xl mx-auto py-24 px-6">
