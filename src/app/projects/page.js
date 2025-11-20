@@ -58,7 +58,7 @@ export default function Projects() {
             border border-blue-500/40 text-blue-400 hover:bg-blue-500/10 
             transition-all backdrop-blur-md shadow-[0_0_15px_rgba(59,130,246,0.2)]"
           >
-            GitHub →
+            More Projects in my GitHub →
           </a>
         </div>
       </Reveal>
