@@ -11,8 +11,10 @@ export default function AIWidget() {
   const [loading, setLoading] = useState(false);
   const [input, setInput] = useState("");
   const [showGreeting, setShowGreeting] = useState(false);
-  const welcomeLock = useRef(false);
 
+  const [greetingText, setGreetingText] = useState("");
+
+  const welcomeLock = useRef(false);
   const messagesEndRef = useRef(null);
 
   useEffect(() => {
@@ -62,31 +64,37 @@ export default function AIWidget() {
     setInput("");
     setLoading(true);
 
-    const res = await fetch("/api/ai", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ message: input }),
-    });
+    try {
+      const res = await fetch("/api/ai", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message: input }),
+      });
 
-    const data = await res.json();
+      const data = await res.json();
 
-    let aiText = Array.isArray(data)
-      ? data[0]?.generated_text || "No response"
-      : data.reply || "No response";
+      let aiText = Array.isArray(data)
+        ? data[0]?.generated_text || "No response"
+        : data.reply || "No response";
 
-    setLoading(false);
-
-    typeText(aiText);
-  };
-
-  const getGreeting = () => {
-    const hour = new Date().getHours();
-    if (hour < 12) return "Good morning! 🌅";
-    if (hour < 18) return "Good afternoon! ☀️";
-    return "Good evening! 🌙";
+      setLoading(false);
+      typeText(aiText);
+    } catch (error) {
+      setLoading(false);
+      typeText("Sorry, I encountered an error.");
+    }
   };
 
   useEffect(() => {
+
+    const hour = new Date().getHours();
+    let text = "Hello!";
+    if (hour < 12) text = "Good morning! 🌅";
+    else if (hour < 18) text = "Good afternoon! ☀️";
+    else text = "Good evening! 🌙";
+
+    setGreetingText(text); 
+
     const greeted = sessionStorage.getItem("ai_greeting_shown");
     if (!greeted) {
       setTimeout(() => {
@@ -115,7 +123,7 @@ export default function AIWidget() {
             : "opacity-0 translate-y-2 pointer-events-none"
         }`}
       >
-        👋 {getGreeting()} I'm Carlos’ AI Assistant.
+        👋 {greetingText} I'm Carlos’ AI Assistant.
       </div>
 
       {/* CHAT PANEL */}
