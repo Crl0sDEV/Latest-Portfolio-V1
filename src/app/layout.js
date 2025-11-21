@@ -1,6 +1,7 @@
 import "./globals.css";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import AIWidget from "../components/AIWidget";
 
 export const metadata = {
   title: "Carlos Miguel Sandrino | Web Developer Portfolio",
@@ -87,6 +88,7 @@ export default function RootLayout({ children }) {
         <Navbar />
         <main className="pt-16">{children}</main>
         <Footer />
+        <AIWidget />
       </body>
     </html>
   );
