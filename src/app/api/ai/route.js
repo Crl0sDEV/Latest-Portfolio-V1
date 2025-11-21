@@ -1,3 +1,18 @@
+import { Ratelimit } from "@upstash/ratelimit";
+import { Redis } from "@upstash/redis";
+import { NextResponse } from "next/server";
+
+const redis = new Redis({
+  url: process.env.UPSTASH_REDIS_REST_URL,
+  token: process.env.UPSTASH_REDIS_REST_TOKEN,
+});
+
+//Rate Limiter
+const ratelimit = new Ratelimit({
+  redis: redis,
+  limiter: Ratelimit.slidingWindow(5, "60 s"), 
+});
+
 const SYSTEM_PROMPT = `
 You are an AI chatbot inside the personal portfolio website of Carlos Miguel Sandrino.
 Visitors can ask you about Carlos or general questions.
@@ -24,6 +39,18 @@ Always answer politely and professionally.
 
 export async function POST(req) {
   try {
+    
+    const ip = req.headers.get("x-forwarded-for") || "127.0.0.1";
+
+    const { success, limit, reset, remaining } = await ratelimit.limit(ip);
+
+    if (!success) {
+      return NextResponse.json(
+        { reply: "Boss, dahan-dahan lang! Wait ka muna ng 1 minute bago magtanong ulit. 😅" },
+        { status: 429 }
+      );
+    }
+
     const { message } = await req.json();
 
     const response = await fetch(
@@ -52,11 +79,11 @@ export async function POST(req) {
       data?.choices?.[0]?.message?.content ||
       "Sorry boss, di ko ma-process yung tanong.";
 
-    return Response.json({ reply: aiReply });
+    return NextResponse.json({ reply: aiReply });
 
   } catch (err) {
     console.error("AI error:", err);
-    return Response.json(
+    return NextResponse.json(
       { reply: "Boss, nagka-error sa AI request." },
       { status: 500 }
     );
