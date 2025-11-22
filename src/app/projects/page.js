@@ -1,6 +1,6 @@
 export const metadata = {
-  title: "Projects | Carlos Miguel Sandrino",
-  description: "See all projects developed by Carlos Miguel Sandrino.",
+  title: "My Projects | Carlos Miguel Sandrino",
+  description: "A showcase of applications and systems developed by Carlos Miguel Sandrino.",
 };
 
 import Reveal from "../../components/Reveal";
@@ -11,13 +11,39 @@ export default function Projects() {
   const projects = [
     {
       title: "Capstone Title Generator",
-      description: "AI-powered title suggestion system for BSIT/BSCS/BSIS.",
+      description:
+        "An AI-powered generator that creates thesis and capstone titles for BSIT, BSCS, and BSIS students.",
+      link: "https://capstone-title-generator-by-carlos.vercel.app/",
+    },
+    {
+      title: "Water Level Monitoring System – Web Dashboard",
+      description:
+        "A real-time monitoring dashboard built using JSN-SR40T ultrasonic sensor and GSM 900A module.",
+      link: "https://waterlevelmonitoring.vercel.app/",
+    },
+    {
+      title: "Water Level Monitoring System – Mobile App",
+      description:
+        "Android app built with Flutter and Supabase for live river water-level monitoring.",
       link: "#",
     },
     {
-      title: "QR Code Generator",
-      description: "Generates custom QR codes with vCard or URLs.",
+      title: "Byte & Brew – Loyalty Card System",
+      description:
+        "RFID-based customer rewards platform built with React and Supabase, featuring balance tracking, reloading, and rewards.",
+      link: "https://byteand-brew.vercel.app/",
+    },
+    {
+      title: "UNITRACK – Real-Time Group Tracking App",
+      description:
+        "Flutter + Firebase application for real-time location tracking inside school campuses.",
       link: "#",
+    },
+    {
+      title: "Personal Portfolio Website",
+      description:
+        "A modern and responsive developer portfolio built using Next.js, Tailwind CSS, and Vercel.",
+      link: "https://carlos-miguel-sandrino-portfolio.vercel.app/",
     },
   ];
 
@@ -43,7 +69,7 @@ export default function Projects() {
 
       <div className="grid md:grid-cols-2 gap-8">
         {projects.map((project, i) => (
-          <Reveal key={i} delay={i * 0.2 + 0.4}>
+          <Reveal key={i} delay={i * 0.15 + 0.4}>
             <ProjectCard project={project} />
           </Reveal>
         ))}
