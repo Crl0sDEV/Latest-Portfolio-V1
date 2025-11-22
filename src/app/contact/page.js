@@ -5,6 +5,7 @@ import {
   FaLinkedin,
   FaEnvelope,
   FaInstagram,
+  FaTelegram,
 } from "react-icons/fa";
 
 export const metadata = {
@@ -90,6 +91,17 @@ export default function Contact() {
           >
             <FaInstagram />
           </a>
+          {/* Telegram */}
+          <a
+            href="https://t.me/Crlsm23"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-5xl hover:text-blue-600 transition transform hover:scale-125 drop-shadow-[0_0_15px_rgba(37,99,235,0.7)] animate-float delay-600"
+            title="Facebook"
+          >
+            <FaTelegram />
+          </a>
+
         </div>
       </Reveal>
 
