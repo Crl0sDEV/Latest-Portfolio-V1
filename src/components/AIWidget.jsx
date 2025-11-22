@@ -60,7 +60,10 @@ export default function AIWidget() {
     if (!input.trim()) return;
 
     const userMessage = { role: "user", content: input };
-    setMessages((prev) => [...prev, userMessage]);
+    
+    const newHistory = [...messages, userMessage]; 
+
+    setMessages(newHistory); 
     setInput("");
     setLoading(true);
 
@@ -68,15 +71,15 @@ export default function AIWidget() {
       const res = await fetch("/api/ai", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message: input }),
+        body: JSON.stringify({ messages: newHistory }), 
       });
-
+  
       const data = await res.json();
-
+  
       let aiText = Array.isArray(data)
         ? data[0]?.generated_text || "No response"
         : data.reply || "No response";
-
+  
       setLoading(false);
       typeText(aiText);
     } catch (error) {

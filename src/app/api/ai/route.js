@@ -7,7 +7,6 @@ const redis = new Redis({
   token: process.env.UPSTASH_REDIS_REST_TOKEN,
 });
 
-//Rate Limiter
 const ratelimit = new Ratelimit({
   redis: redis,
   limiter: Ratelimit.slidingWindow(5, "60 s"), 
@@ -41,8 +40,7 @@ export async function POST(req) {
   try {
     
     const ip = req.headers.get("x-forwarded-for") || "127.0.0.1";
-
-    const { success, limit, reset, remaining } = await ratelimit.limit(ip);
+    const { success } = await ratelimit.limit(ip);
 
     if (!success) {
       return NextResponse.json(
@@ -51,7 +49,9 @@ export async function POST(req) {
       );
     }
 
-    const { message } = await req.json();
+    const { messages } = await req.json();
+
+    const recentMessages = Array.isArray(messages) ? messages.slice(-6) : [];
 
     const response = await fetch(
       "https://router.huggingface.co/v1/chat/completions",
@@ -65,7 +65,7 @@ export async function POST(req) {
           model: "meta-llama/Llama-3.1-8B-Instruct",
           messages: [
             { role: "system", content: SYSTEM_PROMPT },
-            { role: "user", content: message }
+            ...recentMessages
           ],
           max_tokens: 200,
           temperature: 0.7,
