@@ -20,7 +20,7 @@ export default function Contact() {
       <div  />
 
       <Reveal>
-        <h1 className="text-4xl md:text-5xl font-bold mb-6 text-transparent bg-clip-text bg-blue-500">
+        <h1 className="text-3xl font-bold mb-6 text-blue-400">
           Contact Me
         </h1>
       </Reveal>
