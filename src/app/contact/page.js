@@ -108,5 +108,3 @@ export default function Contact() {
     </section>
   );
 }
-
-/* Add this custom animation in your globals.css or tailwind.css */

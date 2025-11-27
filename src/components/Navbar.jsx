@@ -20,7 +20,7 @@ export default function Navbar() {
         </h1>
 
         <div className="hidden md:flex space-x-6">
-          {["Home", "About", "Projects", "Contact"].map((link, i) => (
+          {["Home", "About", "Projects", "Contact", "Blog"].map((link, i) => (
             <motion.div
               key={link}
               whileHover={{ scale: 1.1 }}
@@ -43,7 +43,7 @@ export default function Navbar() {
 
       {isOpen && (
         <div className="md:hidden bg-black flex flex-col items-center space-y-4 py-4 border-t border-gray-700">
-          {["Home", "About", "Projects", "Contact"].map((link) => (
+          {["Home", "About", "Projects", "Contact", "Blog"].map((link) => (
             <Link
               key={link}
               href={link === "Home" ? "/" : `/${link.toLowerCase()}`}
