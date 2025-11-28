@@ -42,9 +42,15 @@ export default function About() {
           <span className="text-white font-semibold">
             Carlos Miguel Sandrino
           </span>
-          , a BSIT graduate passionate about building clean and modern web and
-          mobile applications using technologies like{" "}
-          <span className="text-blue-400">React</span>,{" "}
+          , a 23-year-old BSIT graduate from{" "}
+          <span className="text-blue-400 font-semibold">Bicol University</span>.
+          I have{" "}
+          <span className="text-blue-400 font-semibold">
+            1 year and 10 months of freelancing experience
+          </span>
+          , working on real-world projects in web and mobile development. I
+          specialize in building clean, modern, and functional applications
+          using <span className="text-blue-400">React</span>,{" "}
           <span className="text-blue-400">Next.js</span>,{" "}
           <span className="text-blue-400">Tailwind CSS</span>,{" "}
           <span className="text-blue-400">Supabase</span>, and{" "}
@@ -55,9 +61,62 @@ export default function About() {
       <Reveal delay={0.4}>
         <p className="text-gray-300 leading-relaxed mb-10">
           I enjoy creating projects that blend functionality with design — from
-          interactive dashboards to cross-platform mobile apps. My goal is to
-          continuously improve my skills and collaborate with clients to bring
-          their ideas to life.
+          interactive dashboards and API-powered systems to cross-platform
+          mobile apps. Throughout my freelancing journey, I’ve collaborated with
+          clients to build practical solutions that solve real problems. My goal
+          is to continue improving my craft and deliver high-quality work that
+          brings ideas to life.
+        </p>
+      </Reveal>
+
+      {/* ========= SOFT SKILLS ========= */}
+      <Reveal delay={0.5}>
+        <h1 className="text-2xl font-semibold text-blue-400 mb-4">
+          Soft Skills
+        </h1>
+
+        <p className="text-gray-300 leading-relaxed mb-8">
+          Beyond technical tools, I value the importance of communication,
+          consistency, and problem-solving. I always make sure that every
+          project I work on is approached with clarity, focus, and patience —
+          whether I’m working independently or collaborating with a team.
+        </p>
+
+        <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-gray-300">
+          {[
+            "Strong attention to detail",
+            "Clear and consistent communication",
+            "Adaptability and willingness to learn",
+            "Time management and organization",
+            "Problem-solving and analytical thinking",
+            "Client collaboration and professionalism",
+          ].map((skill, index) => (
+            <li
+              key={index}
+              className="bg-gray-800 p-4 rounded-xl border border-gray-700 hover:scale-[1.03] transition"
+            >
+              • {skill}
+            </li>
+          ))}
+        </ul>
+      </Reveal>
+
+      {/* ========= WHY I BUILD THINGS ========= */}
+      <Reveal delay={0.6}>
+        <h1 className="text-2xl font-semibold text-blue-400 mt-12 mb-4">
+          Why I Build Things
+        </h1>
+
+        <p className="text-gray-300 leading-relaxed mb-12">
+          I love building projects that make life easier — whether it’s a
+          dashboard, a mobile app, a system for automation, or a modern website.
+          Every project I create is an opportunity to learn something new and
+          turn ideas into something real and useful.
+          <br />
+          <br />
+          For me, development is more than just writing code — it&apos;s about
+          solving problems, improving processes, and creating meaningful digital
+          experiences that help people and businesses.
         </p>
       </Reveal>
 
@@ -77,8 +136,16 @@ export default function About() {
             {[
               { Icon: FaHtml5, color: "text-orange-500", name: "HTML" },
               { Icon: FaCss3Alt, color: "text-blue-500", name: "CSS" },
-              { Icon: FaJsSquare, color: "text-yellow-400", name: "JavaScript" },
-              { Icon: SiTypescript, color: "text-blue-400", name: "TypeScript" },
+              {
+                Icon: FaJsSquare,
+                color: "text-yellow-400",
+                name: "JavaScript",
+              },
+              {
+                Icon: SiTypescript,
+                color: "text-blue-400",
+                name: "TypeScript",
+              },
               { Icon: FaReact, color: "text-cyan-400", name: "React" },
               { Icon: SiNextdotjs, color: "text-white", name: "Next.js" },
               { Icon: SiTailwindcss, color: "text-sky-400", name: "Tailwind" },
