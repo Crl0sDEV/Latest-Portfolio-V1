@@ -1,7 +1,7 @@
 "use client";
 
 import Reveal from "../components/Reveal";
-import ParticlesBackground from "../components/ParticlesBackground"; // BAGO: Eto na yung hacker style
+import ParticlesBackground from "../components/ParticlesBackground";
 import { motion } from "framer-motion";
 import { FaDownload, FaEnvelope } from "react-icons/fa";
 import Link from "next/link";
@@ -18,7 +18,7 @@ export default function Home() {
       <div className="relative z-10 flex flex-col items-center max-w-4xl mx-auto text-center">
         
         <Reveal>
-          <h1 className="text-5xl md:text-6xl font-bold bg-linear-to-r from-blue-400 via-purple-500 to-pink-500 bg-clip-text text-transparent animate-pulse drop-shadow-[0_0_10px_rgba(147,51,234,0.6)] py-2">
+          <h1 className="text-4xl md:text-5xl font-bold bg-linear-to-r from-blue-400 via-purple-500 to-pink-500 bg-clip-text text-transparent animate-pulse drop-shadow-[0_0_10px_rgba(147,51,234,0.6)] py-2">
             Hi, I&apos;m{" "}
             <span className="font-extrabold text-white drop-shadow-[0_0_10px_rgba(56,189,248,0.6)] block mt-2 md:inline">
               Carlos Miguel Sandrino
@@ -37,6 +37,7 @@ export default function Home() {
                   "Next.js Enthusiast",
                   "Supabase Builder",
                   "Mobile App Developer",
+                  "Full Stack Developer",
                 ],
                 autoStart: true,
                 loop: true,
