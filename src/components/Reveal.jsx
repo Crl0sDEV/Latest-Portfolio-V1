@@ -7,7 +7,7 @@ import { useInView } from "react-intersection-observer";
 export default function Reveal({ children, delay = 0 }) {
   const controls = useAnimation();
   const [ref, inView] = useInView({
-    threshold: 0.2, // trigger kapag 20% visible
+    threshold: 0.2,
   });
 
   useEffect(() => {
