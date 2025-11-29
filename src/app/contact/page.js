@@ -1,12 +1,6 @@
 import Reveal from "../../components/Reveal";
-import {
-  FaGithub,
-  FaFacebook,
-  FaLinkedin,
-  FaEnvelope,
-  FaInstagram,
-  FaTelegram,
-} from "react-icons/fa";
+import EmailCard from "../../components/EmailCard";
+import SocialLinks from "../../components/SocialLinks";
 
 export const metadata = {
   title: "Contact Me | Carlos Miguel Sandrino",
@@ -15,96 +9,38 @@ export const metadata = {
 
 export default function Contact() {
   return (
-    <section className="relative max-w-5xl mx-auto py-28 px-6 text-center overflow-hidden">
-      {/* Subtle gradient background glow */}
-      <div  />
+    <section className="relative w-full min-h-screen py-24 px-4 md:px-8 bg-black text-white flex flex-col items-center overflow-hidden">
+      
+      {/* Background Ambience */}
+      <div className="absolute top-[-20%] left-[-10%] w-[500px] h-[500px] bg-blue-900/20 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-[-20%] right-[-10%] w-[500px] h-[500px] bg-cyan-900/20 rounded-full blur-[120px] pointer-events-none" />
 
-      <Reveal>
-        <h1 className="text-3xl font-bold mb-6 text-blue-400">
-          Contact Me
-        </h1>
-      </Reveal>
+      {/* Header Text */}
+      <div className="relative z-10 text-center mb-12">
+        <Reveal>
+          <h1 className="text-3xl font-bold mb-6">
+            Let&apos;s <span className="text-transparent bg-clip-text bg-linear-to-r from-blue-400 to-cyan-300">Connect</span>
+          </h1>
+        </Reveal>
 
-      {/* Animated underline */}
-      <Reveal delay={0.2}>
-        <div className="w-24 h-1 mx-auto mb-10 bg-linear-to-r from-blue-500 via-cyan-400 to-blue-500 rounded-full animate-pulse"></div>
-      </Reveal>
+        <Reveal delay={0.2}>
+          <p className="text-gray-400 text-lg max-w-xl mx-auto">
+            Open for freelance projects, collaborations, or just a tech chat.
+            Feel free to reach out!
+          </p>
+        </Reveal>
+      </div>
 
-      <Reveal delay={0.3}>
-        <p className="text-gray-300 mb-12 max-w-2xl mx-auto text-lg">
-          Interested in working together or just want to say hi?  
-          Feel free to reach out through any of my socials below 👇
-        </p>
-      </Reveal>
+      {/* Main Grid Content */}
+      <div className="w-full max-w-5xl grid grid-cols-1 md:grid-cols-2 gap-6 relative z-10 pb-20">
+        
+        {/* Left Side: Email Card */}
+        <EmailCard email="sandrinocarlosmiguel@gmail.com" />
 
-      <Reveal delay={0.5}>
-        <div className="flex flex-wrap justify-center gap-10 text-gray-400">
-          {/* Email */}
-          <a
-            href="mailto:sandrinocarlosmiguel@gmail.com"
-            className="text-5xl hover:text-blue-400 transition transform hover:scale-125 drop-shadow-[0_0_15px_rgba(56,189,248,0.7)] animate-float"
-            title="Email"
-          >
-            <FaEnvelope />
-          </a>
+        {/* Right Side: Social Links Grid */}
+        <SocialLinks />
 
-          {/* GitHub */}
-          <a
-            href="https://github.com/Crl0sDEV"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-5xl hover:text-white transition transform hover:scale-125 drop-shadow-[0_0_15px_rgba(255,255,255,0.7)] animate-float delay-200"
-            title="GitHub"
-          >
-            <FaGithub />
-          </a>
-
-          {/* LinkedIn */}
-          <a
-            href="https://www.linkedin.com/in/sandrino-carlos-miguel"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-5xl hover:text-blue-500 transition transform hover:scale-125 drop-shadow-[0_0_15px_rgba(59,130,246,0.7)] animate-float delay-400"
-            title="LinkedIn"
-          >
-            <FaLinkedin />
-          </a>
-
-          {/* Facebook */}
-          <a
-            href="https://www.facebook.com/KreizzyCarl"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-5xl hover:text-blue-600 transition transform hover:scale-125 drop-shadow-[0_0_15px_rgba(37,99,235,0.7)] animate-float delay-600"
-            title="Facebook"
-          >
-            <FaFacebook />
-          </a>
-
-          {/* Instagram */}
-          <a
-            href="https://www.instagram.com/crls_mgx"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-5xl hover:text-pink-500 transition transform hover:scale-125 drop-shadow-[0_0_15px_rgba(236,72,153,0.7)] animate-float delay-800"
-            title="Instagram"
-          >
-            <FaInstagram />
-          </a>
-          {/* Telegram */}
-          <a
-            href="https://t.me/Crlsm23"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-5xl hover:text-blue-600 transition transform hover:scale-125 drop-shadow-[0_0_15px_rgba(37,99,235,0.7)] animate-float delay-600"
-            title="Facebook"
-          >
-            <FaTelegram />
-          </a>
-
-        </div>
-      </Reveal>
-
+      </div>
     </section>
   );
 }
