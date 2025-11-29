@@ -7,18 +7,14 @@ export const metadata = {
   title: "AI Blog | Carlos Miguel Sandrino",
   description: "Daily AI-generated blog posts by Carlos Miguel Sandrino.",
 };
-
 export const revalidate = 0; 
 
 function cleanMarkdown(content) {
-  if (!content) return "";
-  return content
-    .replace(/\*\* /g, '**') 
-    
-    .replace(/ \*\*/g, '**')
-    
-    .replace(/^#([^\s#])/gm, '# $1');
-}
+    if (!content) return "";
+    return content
+      .replace(/\*\*/g, '')
+      .replace(/^#([^\s#])/gm, '# $1');
+  }
 
 export default async function BlogPage() {
   const supabase = createClient(
