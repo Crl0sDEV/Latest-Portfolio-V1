@@ -35,8 +35,8 @@ export default async function BlogPage() {
         {/* Header Section */}
         <Reveal>
             <div className="mb-16">
-                <h1 className="text-4xl md:text-6xl font-extrabold mb-4 tracking-tight">
-                    Daily <span className="text-transparent bg-clip-text bg-linear-to-r from-blue-400 to-cyan-300">AI Insights</span>
+                <h1 className="text-3xl font-bold mb-6 tracking-tight">
+                    Daily <span className="bg-clip-text text-blue-400">AI Insights</span>
                 </h1>
                 <p className="text-gray-400 max-w-2xl mx-auto text-lg leading-relaxed">
                     Exploring technology, code, and creativity through the lens of Artificial Intelligence.
