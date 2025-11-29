@@ -2,7 +2,6 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 import { createClient } from "@supabase/supabase-js";
 import { NextResponse } from "next/server";
 
-// IMPORTANT: Force dynamic para laging fresh ang content na i-generate
 export const dynamic = 'force-dynamic';
 
 export async function GET() {
@@ -11,12 +10,10 @@ export async function GET() {
   try {
     console.log("🚀 Starting Blog Generation Cron/API...");
 
-    // 1. Validation
     if (!process.env.GEMINI_API_KEY) {
       return NextResponse.json({ error: "Missing GEMINI_API_KEY" }, { status: 500 });
     }
 
-    // 2. Initialize Clients
     const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
     const model = genAI.getGenerativeModel({ model: modelName });
     
@@ -25,7 +22,6 @@ export async function GET() {
       process.env.SUPABASE_SERVICE_ROLE
     );
 
-    // 3. Topic Selection (Maintained your list)
     const topics = [
       "Modern Web Development",
       "Artificial Intelligence",
@@ -42,31 +38,29 @@ export async function GET() {
     const topic = topics[Math.floor(Math.random() * topics.length)];
     console.log(`📝 Selected Topic: "${topic}"`);
 
-    // 4. Prompt Construction
     const prompt = `
-      Write a high-quality, SEO-ready blog post about: "${topic}".
+      Write a concise, high-value tech blog post about: "${topic}".
       
       Structure Requirements:
-      - A compelling title (First line, no "Title:" prefix)
-      - Introduction
-      - 3–5 subheadings
-      - Examples
-      - Practical tips
-      - Conclusion
+      - A catchy, short title (First line, no "Title:" prefix)
+      - A short Introduction (hook the reader in 2 sentences)
+      - "Key Takeaways" or "Quick Tips" section (use bullet points)
+      - A short code snippet or real-world example (if applicable to the topic)
+      - A 1-sentence inspiring Conclusion
 
-      Tone: Friendly and professional.
-      Length: 600–1200 words.
-      Format: Markdown (but do NOT wrap in code blocks like \`\`\`markdown).
+      Style Guidelines:
+      - Keep paragraphs short (1-3 sentences max).
+      - Use bullet points often for readability.
+      - Tone: Enthusiastic, expert, and direct to the point.
+      - Length: 300–450 words maximum.
+      - Format: Markdown (but do NOT wrap in code blocks like \`\`\`markdown).
     `;
 
-    // 5. Generate Content
     console.log("⏳ Waiting for Gemini...");
     const result = await model.generateContent(prompt);
     const response = await result.response;
     const output = response.text();
 
-    // 6. Safe Title Extraction
-    // Hanapin ang unang linyang may laman, tanggalin ang '#' o '*' kung meron
     const cleanTitle = output
       .split("\n")
       .find((line) => line.trim().length > 0)
@@ -79,12 +73,11 @@ export async function GET() {
 
     console.log(`✅ Generated: "${cleanTitle}"`);
 
-    // 7. Save to Supabase
     const { error: dbError } = await supabase.from("blog_posts").insert({
       title: cleanTitle,
       content: output,
-      topic: topic, // Optional: kung may topic column ka, pwede mo i-save
-      is_published: true, // Optional: depende sa database schema mo
+      topic: topic,
+      is_published: true,
       created_at: new Date().toISOString()
     });
 
@@ -93,7 +86,6 @@ export async function GET() {
       return NextResponse.json({ error: dbError.message }, { status: 500 });
     }
 
-    // 8. Success Response
     return NextResponse.json({
       success: true,
       title: cleanTitle,
@@ -104,7 +96,6 @@ export async function GET() {
   } catch (error) {
     console.error("❌ Generation Error:", error);
 
-    // Specific Error Handling
     if (error.status === 429 || error.message?.includes("429")) {
       return NextResponse.json({ error: "Rate Limit Exceeded (Quota). Try again later." }, { status: 429 });
     }
