@@ -5,6 +5,9 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import Reveal from "./Reveal";
 
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
+
 function cleanMarkdown(content) {
   if (!content) return "";
   return content
@@ -47,7 +50,6 @@ export default function BlogCard({ post, index }) {
 
         {/* Content Body */}
         <div className={`prose prose-invert prose-sm max-w-none text-gray-400 leading-relaxed ${!isExpanded ? 'line-clamp-4' : ''}`}>
-           {/* If expanded, render Markdown. If not, render plain text preview */}
            {isExpanded ? (
               <ReactMarkdown 
                 remarkPlugins={[remarkGfm]}
@@ -57,7 +59,42 @@ export default function BlogCard({ post, index }) {
                     p: ({node, ...props}) => <p className="mb-3 text-gray-300" {...props} />,
                     li: ({node, ...props}) => <li className="ml-4 list-disc marker:text-blue-500" {...props} />,
                     ul: ({node, ...props}) => <ul className="mb-3 pl-2" {...props} />,
-                    code: ({node, ...props}) => <code className="bg-black/30 px-1 py-0.5 rounded text-blue-300 font-mono text-xs" {...props} />
+                    
+                    code({node, inline, className, children, ...props}) {
+                        const match = /language-(\w+)/.exec(className || '');
+                        
+                        return !inline && match ? (
+                          <div className="relative group my-4 rounded-lg overflow-hidden border border-white/10 shadow-lg">
+                            {/* Optional: Mac-style dots decoration */}
+                            <div className="flex items-center gap-1.5 px-4 py-2 bg-[#1e1e1e] border-b border-white/5">
+                                <div className="w-2.5 h-2.5 rounded-full bg-red-500/80"></div>
+                                <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/80"></div>
+                                <div className="w-2.5 h-2.5 rounded-full bg-green-500/80"></div>
+                                <span className="ml-auto text-xs text-gray-500 font-mono">{match[1]}</span>
+                            </div>
+                            
+                            <SyntaxHighlighter
+                                {...props}
+                                style={vscDarkPlus}
+                                language={match[1]}
+                                PreTag="div"
+                                customStyle={{
+                                    margin: 0,
+                                    padding: '1.5rem',
+                                    background: '#0d0d0d',
+                                    fontSize: '0.85rem',
+                                    lineHeight: '1.5',
+                                }}
+                            >
+                                {String(children).replace(/\n$/, '')}
+                            </SyntaxHighlighter>
+                          </div>
+                        ) : (
+                          <code className="bg-blue-500/10 text-blue-300 px-1.5 py-0.5 rounded font-mono text-xs border border-blue-500/20" {...props}>
+                            {children}
+                          </code>
+                        );
+                    }
                 }}
               >
                 {cleanedContent}
@@ -71,7 +108,7 @@ export default function BlogCard({ post, index }) {
         <div className="mt-auto pt-6 flex justify-center">
             <button 
                 onClick={() => setIsExpanded(!isExpanded)}
-                className="group relative px-6 py-2 rounded-full bg-white/5 hover:bg-blue-600/20 border border-white/10 hover:border-blue-500/50 transition-all duration-300 text-sm font-medium text-blue-200"
+                className="cursor-pointer group relative px-6 py-2 rounded-full bg-white/5 hover:bg-blue-600/20 border border-white/10 hover:border-blue-500/50 transition-all duration-300 text-sm font-medium text-blue-200 active:scale-95"
             >
                 {isExpanded ? "Show Less" : "Read Full Post"}
                 <span className={`absolute -bottom-8 left-1/2 -translate-x-1/2 w-1 h-1 bg-blue-500 rounded-full transition-all duration-300 ${isExpanded ? 'opacity-100' : 'opacity-0'}`}></span>
