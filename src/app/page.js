@@ -2,6 +2,7 @@
 
 import Reveal from "../components/Reveal";
 import ParticlesBackground from "../components/ParticlesBackground";
+import VisitorCounter from "@/components/VisitorCounter";
 import { motion } from "framer-motion";
 import { FaDownload, FaEnvelope } from "react-icons/fa";
 import Link from "next/link";
@@ -50,7 +51,6 @@ export default function Home() {
 
         {/* DESCRIPTION */}
         <Reveal delay={0.3}>
-          {/* Binawasan ko ng konti opacity ng background ng box para mas kita yung lines sa likod */}
           <p className="mt-8 text-gray-300 text-lg leading-relaxed backdrop-blur-sm bg-black/60 p-6 rounded-2xl border border-white/10 shadow-xl">
             A passionate web developer crafting modern and responsive websites
             using{" "}
@@ -70,7 +70,6 @@ export default function Home() {
               whileTap={{ scale: 0.95 }}
               className="group relative inline-flex items-center gap-3 px-8 py-4 rounded-full bg-linear-to-r from-blue-600 via-purple-600 to-pink-600 text-white font-bold shadow-lg overflow-hidden transition-all"
             >
-               {/* Hover Shine Effect */}
               <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
               <FaDownload className="text-xl" />
               <span>Download CV</span>
@@ -88,6 +87,8 @@ export default function Home() {
             </Link>
           </div>
         </Reveal>
+
+        <VisitorCounter />
       
       </div>
     </main>
