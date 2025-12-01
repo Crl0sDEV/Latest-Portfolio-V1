@@ -64,7 +64,7 @@ export default function Home() {
         <Reveal delay={0.5}>
           <div className="mt-10 flex flex-wrap justify-center gap-5">
             <motion.a
-              href="/CarlosMiguelSandrino_CV.pdf"
+              href="/SANDRINO_CARLOS_MIGUEL.pdf"
               download
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
@@ -72,7 +72,7 @@ export default function Home() {
             >
               <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
               <FaDownload className="text-xl" />
-              <span>Download CV</span>
+              <span>Download Resume</span>
             </motion.a>
 
             <Link href="/contact">
