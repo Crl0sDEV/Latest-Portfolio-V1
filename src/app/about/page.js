@@ -32,10 +32,6 @@ export default function About() {
   return (
     <section className="max-w-5xl mx-auto py-24 px-6">
 
-      {/* Background Ambience */}
-      <div className="absolute top-[-20%] left-[-10%] w-[500px] h-[500px] bg-blue-900/20 rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-[-20%] right-[-10%] w-[500px] h-[500px] bg-cyan-900/20 rounded-full blur-[120px] pointer-events-none" />
-      
       <Reveal>
         <h1 className="text-3xl font-bold mb-6 text-blue-400">About Me</h1>
       </Reveal>
