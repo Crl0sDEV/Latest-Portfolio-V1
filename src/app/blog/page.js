@@ -27,8 +27,10 @@ export default async function BlogPage() {
 
   return (
     <section className="relative w-full min-h-screen py-24 px-4 md:px-8 text-center overflow-hidden bg-black text-white">
+        
       {/* Background Ambience */}
-      <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(ellipse_at_top,var(--tw-gradient-stops))] from-blue-900/20 via-black to-black pointer-events-none" />
+      <div className="absolute top-[-20%] left-[-10%] w-[500px] h-[500px] bg-blue-900/20 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-[-20%] right-[-10%] w-[500px] h-[500px] bg-cyan-900/20 rounded-full blur-[120px] pointer-events-none" />
       
       <div className="relative z-10 max-w-6xl mx-auto">
         
