@@ -32,16 +32,25 @@ export default function EmailCard({ email }) {
             <div className="flex gap-3 flex-wrap justify-center w-full">
             <a 
                 href={`mailto:${email}`}
-                className="cursor-pointer px-6 py-2.5 bg-blue-600 hover:bg-blue-500 text-white font-semibold rounded-full transition-all shadow-lg shadow-blue-500/25 active:scale-95"
+
+                className="cursor-pointer min-w-[140px] flex justify-center items-center px-6 py-2.5 bg-blue-600 hover:bg-blue-500 text-white font-semibold rounded-full transition-all shadow-lg shadow-blue-500/25 active:scale-95"
             >
                 Send Email
             </a>
+            
             <button 
                 onClick={handleCopy}
-                className="cursor-pointer px-6 py-2.5 bg-white/5 hover:bg-white/10 border border-white/10 text-gray-300 font-semibold rounded-full transition-all flex items-center gap-2 active:scale-95"
+
+                className="cursor-pointer min-w-[140px] flex justify-center items-center px-6 py-2.5 bg-white/5 hover:bg-white/10 border border-white/10 text-gray-300 font-semibold rounded-full transition-all gap-2 active:scale-95"
             >
-                {copied ? <FaCheck className="text-green-400" /> : <FaCopy />}
-                {copied ? "Copied!" : "Copy"}
+                
+                <span className={`transition-all duration-300 ${copied ? 'text-green-400' : 'text-gray-300'}`}>
+                    {copied ? <FaCheck /> : <FaCopy />}
+                </span>
+
+                <span className="w-[60px] text-left">
+                    {copied ? "Copied!" : "Copy"}
+                </span>
             </button>
             </div>
         </div>
