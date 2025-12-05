@@ -74,11 +74,8 @@ export default function RootLayout({ children }) {
           name="google-site-verification"
           content="XrhjcO-Xcvf0l4TVmWp7WdXGEOQ_Cs3v_BW7z3OYV6I"
         />
-
-        {/* THEME COLOR FOR MOBILE BROWSERS */}
         <meta name="theme-color" content="#000000" />
 
-        {/* FAVICON (for extra safety even though Next.js auto-adds based on metadata) */}
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 

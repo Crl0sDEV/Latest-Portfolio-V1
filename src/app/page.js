@@ -11,11 +11,9 @@ import Typewriter from "typewriter-effect";
 export default function Home() {
   return (
     <main className="relative w-full min-h-screen bg-black text-white px-6 flex flex-col items-center justify-center overflow-hidden">
-      
-      {/* 1. BACKGROUND LAYER - Techy Network Effect */}
+  
       <ParticlesBackground />
 
-      {/* 2. CONTENT LAYER (Naka z-10 pa rin para lumutang sa lines) */}
       <div className="relative z-10 flex flex-col items-center max-w-4xl mx-auto text-center">
         
         <Reveal>
@@ -27,7 +25,6 @@ export default function Home() {
           </h1>
         </Reveal>
 
-        {/* TYPEWRITER EFFECT */}
         <Reveal delay={0.2}>
           <div className="mt-6 text-xl md:text-2xl font-semibold text-blue-400">
             <Typewriter
@@ -49,7 +46,6 @@ export default function Home() {
           </div>
         </Reveal>
 
-        {/* DESCRIPTION */}
         <Reveal delay={0.3}>
           <p className="mt-8 text-gray-300 text-lg leading-relaxed backdrop-blur-sm bg-black/60 p-6 rounded-2xl border border-white/10 shadow-xl">
             A passionate web developer crafting modern and responsive websites
