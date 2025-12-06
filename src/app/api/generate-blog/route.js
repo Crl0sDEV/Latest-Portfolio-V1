@@ -2,25 +2,48 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 import { createClient } from "@supabase/supabase-js";
 import { NextResponse } from "next/server";
 
+export const maxDuration = 60; 
 export const dynamic = 'force-dynamic';
 
 export async function GET() {
   const modelName = "gemini-3-pro-preview";
 
   try {
-    console.log("🚀 Starting Blog Generation Cron/API...");
+    console.log("Starting Blog Generation Cron/API...");
 
     if (!process.env.GEMINI_API_KEY) {
       return NextResponse.json({ error: "Missing GEMINI_API_KEY" }, { status: 500 });
     }
 
-    const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-    const model = genAI.getGenerativeModel({ model: modelName });
-    
     const supabase = createClient(
       process.env.SUPABASE_URL,
       process.env.SUPABASE_SERVICE_ROLE
     );
+
+    const startOfDay = new Date();
+    startOfDay.setHours(0, 0, 0, 0);
+
+    const { data: existingPosts, error: checkError } = await supabase
+      .from("blog_posts")
+      .select("id")
+      .gte("created_at", startOfDay.toISOString()) 
+      .limit(1);
+
+    if (checkError) {
+        console.error("Error checking existing posts:", checkError);
+    }
+
+    if (existingPosts && existingPosts.length > 0) {
+       console.log("Duplicate Prevention: A blog post already exists for today. Skipping generation.");
+       return NextResponse.json({ 
+           success: true, 
+           message: "Skipped: Daily blog post already exists for today.",
+           skipped: true
+       });
+    }
+
+    const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+    const model = genAI.getGenerativeModel({ model: modelName });
 
     const topics = [
       "Modern Web Development",
@@ -36,7 +59,7 @@ export async function GET() {
     ];
 
     const topic = topics[Math.floor(Math.random() * topics.length)];
-    console.log(`📝 Selected Topic: "${topic}"`);
+    console.log(`Selected Topic: "${topic}"`);
 
     const prompt = `
       Write a concise, high-value tech blog post about: "${topic}".
@@ -56,7 +79,7 @@ export async function GET() {
       - Format: Markdown (but do NOT wrap in code blocks like \`\`\`markdown).
     `;
 
-    console.log("⏳ Waiting for Gemini...");
+    console.log("Waiting for Gemini...");
     const result = await model.generateContent(prompt);
     const response = await result.response;
     const output = response.text();
@@ -71,7 +94,7 @@ export async function GET() {
       throw new Error("Generated content was too short or empty.");
     }
 
-    console.log(`✅ Generated: "${cleanTitle}"`);
+    console.log(`Generated: "${cleanTitle}"`);
 
     const { error: dbError } = await supabase.from("blog_posts").insert({
       title: cleanTitle,
@@ -82,7 +105,7 @@ export async function GET() {
     });
 
     if (dbError) {
-      console.error("❌ Database Insert Error:", dbError);
+      console.error("Database Insert Error:", dbError);
       return NextResponse.json({ error: dbError.message }, { status: 500 });
     }
 
@@ -94,7 +117,7 @@ export async function GET() {
     });
 
   } catch (error) {
-    console.error("❌ Generation Error:", error);
+    console.error("Generation Error:", error);
 
     if (error.status === 429 || error.message?.includes("429")) {
       return NextResponse.json({ error: "Rate Limit Exceeded (Quota). Try again later." }, { status: 429 });
