@@ -6,7 +6,7 @@ export const maxDuration = 60;
 export const dynamic = 'force-dynamic';
 
 export async function GET() {
-  const modelName = "gemini-3-pro-preview";
+  const modelName = "gemini-2.5-flash";
 
   try {
     console.log("Starting Blog Generation Cron/API...");
