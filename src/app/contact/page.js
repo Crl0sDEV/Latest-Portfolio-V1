@@ -14,7 +14,7 @@ export default function Contact() {
       {/* Header Text */}
       <div className="relative z-10 text-center mb-12">
         <Reveal>
-          <h1 className="text-3xl font-bold mb-6">
+          <h1 className="text-3xl md:text-4xl font-bold mb-6">
             Let&apos;s <span className="text-transparent bg-clip-text bg-green-400">Connect</span>
           </h1>
         </Reveal>

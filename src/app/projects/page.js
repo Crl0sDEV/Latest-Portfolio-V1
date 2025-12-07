@@ -63,7 +63,7 @@ export default function Projects() {
     <section className="max-w-6xl mx-auto py-24 px-6" id="projects">
 
       <Reveal>
-        <h1 className="text-3xl font-bold mb-8 text-center text-green-400">Projects</h1>
+        <h1 className="text-3xl md:text-4xl font-bold mb-8 text-center text-green-400">Projects</h1>
       </Reveal>
 
       <Reveal delay={0.2}>
