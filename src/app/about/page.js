@@ -33,7 +33,7 @@ export default function About() {
     <section className="max-w-5xl mx-auto py-24 px-6">
 
       <Reveal>
-        <h1 className="text-3xl font-bold mb-6 text-blue-400">About Me</h1>
+        <h1 className="text-3xl font-bold mb-6 text-green-400">About Me</h1>
       </Reveal>
 
       <Reveal delay={0.2}>
@@ -43,18 +43,18 @@ export default function About() {
             Carlos Miguel Sandrino
           </span>
           , a 23-year-old BSIT graduate from{" "}
-          <span className="text-blue-400 font-semibold">Bicol University</span>.
+          <span className="text-green-400 font-semibold">Bicol University</span>.
           I have{" "}
-          <span className="text-blue-400 font-semibold">
-            1 year and 10 months of freelancing experience
+          <span className="text-green-400 font-semibold">
+            1 year and 11 months of freelancing experience
           </span>
           , working on real-world projects in web and mobile development. I
           specialize in building clean, modern, and functional applications
-          using <span className="text-blue-400">React</span>,{" "}
-          <span className="text-blue-400">Next.js</span>,{" "}
-          <span className="text-blue-400">Tailwind CSS</span>,{" "}
-          <span className="text-blue-400">Supabase</span>, and{" "}
-          <span className="text-blue-400">Flutter</span>.
+          using <span className="text-green-400">React</span>,{" "}
+          <span className="text-green-400">Next.js</span>,{" "}
+          <span className="text-green-400">Tailwind CSS</span>,{" "}
+          <span className="text-green-400">Supabase</span>, and{" "}
+          <span className="text-green-400">Flutter</span>.
         </p>
       </Reveal>
 
@@ -71,7 +71,7 @@ export default function About() {
 
       {/* ========= SOFT SKILLS ========= */}
       <Reveal delay={0.5}>
-        <h1 className="text-2xl font-semibold text-blue-400 mb-4">
+        <h1 className="text-2xl font-semibold text-green-400 mb-4">
           Soft Skills
         </h1>
 
@@ -103,7 +103,7 @@ export default function About() {
 
       {/* ========= WHY I BUILD THINGS ========= */}
       <Reveal delay={0.6}>
-        <h1 className="text-2xl font-semibold text-blue-400 mt-12 mb-4">
+        <h1 className="text-2xl font-semibold text-green-400 mt-12 mb-4">
           Why I Build Things
         </h1>
 
@@ -121,7 +121,7 @@ export default function About() {
       </Reveal>
 
       <Reveal delay={0.4}>
-        <h1 className="text-2xl font-semibold text-blue-400 mb-6">
+        <h1 className="text-2xl font-semibold text-green-400 mb-6">
           Programming Skills
         </h1>
       </Reveal>
@@ -129,7 +129,7 @@ export default function About() {
       {/* ========= FRONTEND ========= */}
       <Reveal delay={0.6}>
         <div className="mb-12">
-          <h2 className="text-2xl font-semibold text-blue-400 mb-6 underline">
+          <h2 className="text-2xl font-semibold text-green-400 mb-6 underline">
             Frontend
           </h2>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6 text-gray-300">
@@ -167,7 +167,7 @@ export default function About() {
       {/* ========= BACKEND ========= */}
       <Reveal delay={0.8}>
         <div className="mb-12">
-          <h2 className="text-2xl font-semibold text-blue-400 mb-6 underline">
+          <h2 className="text-2xl font-semibold text-green-400 mb-6 underline">
             Backend
           </h2>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6 text-gray-300">
@@ -196,7 +196,7 @@ export default function About() {
       {/* ========= MOBILE DEVELOPMENT ========= */}
       <Reveal delay={1.0}>
         <div className="mb-12">
-          <h2 className="text-2xl font-semibold text-blue-400 mb-6 underline">
+          <h2 className="text-2xl font-semibold text-green-400 mb-6 underline">
             Mobile Development
           </h2>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6 text-gray-300">
@@ -221,7 +221,7 @@ export default function About() {
       {/* ========= TOOLS ========= */}
       <Reveal delay={1.2}>
         <div>
-          <h2 className="text-2xl font-semibold text-blue-400 mb-6 underline">
+          <h2 className="text-2xl font-semibold text-green-400 mb-6 underline">
             Tools & Others
           </h2>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6 text-gray-300">

@@ -45,7 +45,7 @@ export default function VisitorCounter() {
       transition={{ delay: 1 }}
       className="mt-12 flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 text-gray-400 text-sm backdrop-blur-md"
     >
-      <FaEye className="text-blue-400" />
+      <FaEye className="text-green-400" />
       <span>
         <strong className="text-white">{count.toLocaleString()}</strong> Visitors
       </span>

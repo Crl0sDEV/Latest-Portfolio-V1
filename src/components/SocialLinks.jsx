@@ -48,7 +48,7 @@ export default function SocialLinks() {
             href={social.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="group relative bg-zinc-900/50 backdrop-blur-sm border border-white/10 p-6 rounded-2xl flex flex-col items-center hover:bg-white/5 transition-all hover:-translate-y-1 hover:border-blue-500/30 shadow-lg"
+            className="group relative bg-zinc-900/50 backdrop-blur-sm border border-white/10 p-6 rounded-2xl flex flex-col items-center hover:bg-white/5 transition-all hover:-translate-y-1 hover:border-green-500/30 shadow-lg"
           >
             <div className={`text-4xl mb-3 transition-colors duration-300 text-gray-400 ${social.color}`}>
               {social.icon}

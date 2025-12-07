@@ -10,16 +10,12 @@ export const metadata = {
 export default function Contact() {
   return (
     <section className="relative w-full min-h-screen py-24 px-4 md:px-8 bg-black text-white flex flex-col items-center overflow-hidden">
-      
-      {/* Background Ambience */}
-      <div className="absolute top-[-20%] left-[-10%] w-[500px] h-[500px] bg-blue-900/20 rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-[-20%] right-[-10%] w-[500px] h-[500px] bg-cyan-900/20 rounded-full blur-[120px] pointer-events-none" />
 
       {/* Header Text */}
       <div className="relative z-10 text-center mb-12">
         <Reveal>
           <h1 className="text-3xl font-bold mb-6">
-            Let&apos;s <span className="text-transparent bg-clip-text bg-linear-to-r from-blue-400 to-cyan-300">Connect</span>
+            Let&apos;s <span className="text-transparent bg-clip-text bg-green-400">Connect</span>
           </h1>
         </Reveal>
 

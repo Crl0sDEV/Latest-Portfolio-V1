@@ -97,7 +97,7 @@ export default function AIWidget() {
       {/* FLOATING BUTTON */}
       <button
         onClick={handleOpen}
-        className="fixed bottom-4 right-4 md:bottom-6 md:right-6 bg-white text-blue-600 w-14 h-14 rounded-full shadow-xl flex items-center justify-center hover:bg-blue-700 transition-all z-50 overflow-hidden p-3"
+        className="fixed bottom-4 right-4 md:bottom-6 md:right-6 bg-white text-green-600 w-14 h-14 rounded-full shadow-xl flex items-center justify-center hover:bg-green-700 transition-all z-50 overflow-hidden p-3"
       >
         {isOpen ? (
           <svg
@@ -146,7 +146,7 @@ export default function AIWidget() {
             : "opacity-0 pointer-events-none translate-y-5"
         }`}
       >
-        <h2 className="text-blue-400 font-bold text-lg mb-3 flex items-center gap-2">
+        <h2 className="text-green-400 font-bold text-lg mb-3 flex items-center gap-2">
           <img src="/chatbot.svg" alt="Bot" className="w-6 h-6" />
           AI Chat Assistant
         </h2>
@@ -157,7 +157,7 @@ export default function AIWidget() {
               key={i}
               className={`p-2 rounded-lg max-w-[90%] text-sm md:text-base ${
                 msg.role === "user"
-                  ? "bg-blue-600 text-white ml-auto"
+                  ? "bg-green-600 text-white ml-auto"
                   : "bg-gray-800 text-gray-200"
               }`}
             >
@@ -187,12 +187,12 @@ export default function AIWidget() {
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && sendMessage()}
-            className="flex-1 px-3 py-2 bg-black border border-gray-700 rounded-lg text-white text-sm md:text-base focus:outline-none focus:border-blue-500 transition-colors"
+            className="flex-1 px-3 py-2 bg-black border border-gray-700 rounded-lg text-white text-sm md:text-base focus:outline-none focus:border-green-500 transition-colors"
             placeholder="Ask something..."
           />
           <button
             onClick={sendMessage}
-            className="px-3 py-2 bg-blue-600 rounded-lg text-white hover:bg-blue-700 text-sm md:text-base flex items-center justify-center transition-colors"
+            className="px-3 py-2 bg-green-600 rounded-lg text-white hover:bg-green-700 text-sm md:text-base flex items-center justify-center transition-colors"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"

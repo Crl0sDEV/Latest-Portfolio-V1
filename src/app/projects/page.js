@@ -63,7 +63,7 @@ export default function Projects() {
     <section className="max-w-6xl mx-auto py-24 px-6" id="projects">
 
       <Reveal>
-        <h1 className="text-3xl font-bold mb-8 text-center text-blue-400">Projects</h1>
+        <h1 className="text-3xl font-bold mb-8 text-center text-green-400">Projects</h1>
       </Reveal>
 
       <Reveal delay={0.2}>
@@ -97,8 +97,8 @@ export default function Projects() {
             href="https://github.com/Crl0sDEV"
             target="_blank"
             className="inline-flex items-center gap-3 px-6 py-3 rounded-xl 
-            border border-blue-500/40 text-blue-400 hover:bg-blue-500/10 
-            transition-all backdrop-blur-md shadow-[0_0_15px_rgba(59,130,246,0.2)]"
+            border border-green-500/40 text-green-400 hover:bg-green-500/10 
+            transition-all backdrop-blur-md shadow-[0_0_15px_rgba(74,222,128,0.5)]"
           >
             More Projects in my GitHub →
           </a>

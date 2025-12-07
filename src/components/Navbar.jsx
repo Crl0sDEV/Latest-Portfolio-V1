@@ -16,7 +16,7 @@ export default function Navbar() {
     >
       <div className="max-w-6xl mx-auto px-5 flex justify-between items-center h-16">
         <h1 className="text-xl font-bold">
-          Carlos<span className="text-blue-400">Dev</span>
+          Carlos<span className="text-green-400">Dev</span>
         </h1>
 
         <div className="hidden md:flex space-x-6">
@@ -28,7 +28,7 @@ export default function Navbar() {
             >
               <Link
                 href={link === "Home" ? "/" : `/${link.toLowerCase()}`}
-                className="hover:text-blue-400"
+                className="hover:text-green-400"
               >
                 {link}
               </Link>
@@ -48,7 +48,7 @@ export default function Navbar() {
               key={link}
               href={link === "Home" ? "/" : `/${link.toLowerCase()}`}
               onClick={() => setIsOpen(false)}
-              className="hover:text-blue-400"
+              className="hover:text-green-400"
             >
               {link}
             </Link>

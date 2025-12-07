@@ -27,7 +27,7 @@ export default function ProjectCard({ project, priority = false }) {
           />
         ) : (
           <div className="flex items-center justify-center h-full w-full bg-gray-800/50">
-            <FaCode className="text-4xl text-gray-600 group-hover:text-blue-500/50 transition-colors" />
+            <FaCode className="text-4xl text-gray-600 group-hover:text-green-500/50 transition-colors" />
           </div>
         )}
 
@@ -49,7 +49,7 @@ export default function ProjectCard({ project, priority = false }) {
       {/* 2. CONTENT SECTION */}
       <div className="p-6 flex flex-col grow">
         <div className="flex justify-between items-start mb-2">
-          <h2 className="text-xl font-bold text-gray-100 group-hover:text-blue-400 transition-colors">
+          <h2 className="text-xl font-bold text-gray-100 group-hover:text-green-400 transition-colors">
             {project.title}
           </h2>
 
@@ -58,7 +58,7 @@ export default function ProjectCard({ project, priority = false }) {
               href={project.link}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-gray-500 hover:text-blue-400 transition-colors z-20"
+              className="text-gray-500 hover:text-green-400 transition-colors z-20"
             >
               <FaExternalLinkAlt className="text-sm" />
             </a>
@@ -75,7 +75,7 @@ export default function ProjectCard({ project, priority = false }) {
             project.tech.map((tech, index) => (
               <span
                 key={index}
-                className="text-xs font-medium px-2.5 py-1 rounded-full bg-blue-900/20 text-blue-300 border border-blue-500/20"
+                className="text-xs font-medium px-2.5 py-1 rounded-full bg-blue-900/20 text-green-300 border border-blue-500/20"
               >
                 {tech}
               </span>
