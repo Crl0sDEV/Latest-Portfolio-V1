@@ -1,14 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { createClient } from "@supabase/supabase-js";
+import { supabase } from "../lib/supabase"
 import { FaEye } from "react-icons/fa";
 import { motion } from "framer-motion";
-
-const supabase = createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
-  );
 
 export default function VisitorCounter() {
   const [count, setCount] = useState(null);
@@ -43,7 +38,7 @@ export default function VisitorCounter() {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 1 }}
-      className="mt-12 flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 text-gray-400 text-sm backdrop-blur-md"
+      className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-gray-400 text-sm backdrop-blur-md"
     >
       <FaEye className="text-green-400" />
       <span>

@@ -44,7 +44,7 @@ export async function POST(req) {
 
     if (!success) {
       return NextResponse.json(
-        { reply: "Boss, dahan-dahan lang! Wait ka muna ng 1 minute bago magtanong ulit. 😅" },
+        { reply: "Boss, dahan-dahan lang! Wait ka muna ng 1 minute bago magtanong ulit." },
         { status: 429 }
       );
     }
