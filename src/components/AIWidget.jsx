@@ -41,7 +41,7 @@ export default function AIWidget() {
         setHasSentWelcome(true);
         setTimeout(() => {
           typeText(
-            "Hello! 👋 I'm Carlos’ AI Assistant. Feel free to ask anything — about Carlos, coding, ideas, or any topic you're curious about!"
+            "Hello! I'm Carlos’ AI Assistant. Feel free to ask anything — about Carlos, coding, ideas, or any topic you're curious about!"
           );
         }, 400);
       }
@@ -77,9 +77,9 @@ export default function AIWidget() {
   useEffect(() => {
     const hour = new Date().getHours();
     let text = "Hello!";
-    if (hour < 12) text = "Good morning! 🌅";
-    else if (hour < 18) text = "Good afternoon! ☀️";
-    else text = "Good evening! 🌙";
+    if (hour < 12) text = "Good morning!";
+    else if (hour < 18) text = "Good afternoon!";
+    else text = "Good evening!";
     setGreetingText(text);
 
     const greeted = sessionStorage.getItem("ai_greeting_shown");
@@ -131,7 +131,7 @@ export default function AIWidget() {
             : "opacity-0 translate-y-2 pointer-events-none"
         }`}
       >
-        👋 {greetingText} I'm Carlos’ AI Assistant.
+       {greetingText} I'm Carlos’ AI Assistant.
       </div>
 
       {/* CHAT PANEL */}
