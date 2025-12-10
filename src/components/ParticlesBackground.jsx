@@ -18,12 +18,10 @@ export default function ParticlesBackground() {
     window.addEventListener("resize", resizeCanvas);
     resizeCanvas();
 
-    // Particle Config
     const particlesArray = [];
-    const numberOfParticles = 80; // Dami ng tuldok
-    const connectionDistance = 150; // Layo bago magkaroon ng guhit
+    const numberOfParticles = 80;
+    const connectionDistance = 150;
 
-    // Mouse interaction
     const mouse = { x: null, y: null, radius: 150 };
 
     window.addEventListener("mousemove", (event) => {
@@ -31,25 +29,22 @@ export default function ParticlesBackground() {
       mouse.y = event.y;
     });
 
-    // Create Particle Class
     class Particle {
       constructor() {
         this.x = Math.random() * canvas.width;
         this.y = Math.random() * canvas.height;
-        this.size = Math.random() * 2 + 1; // Liit ng tuldok
-        this.speedX = Math.random() * 1.5 - 0.75; // horizontal
-        this.speedY = Math.random() * 1.5 - 0.75; // vertical
+        this.size = Math.random() * 2 + 1;
+        this.speedX = Math.random() * 1.5 - 0.75;
+        this.speedY = Math.random() * 1.5 - 0.75;
       }
 
       update() {
         this.x += this.speedX;
         this.y += this.speedY;
 
-        // Bounce off edges
         if (this.x > canvas.width || this.x < 0) this.speedX = -this.speedX;
         if (this.y > canvas.height || this.y < 0) this.speedY = -this.speedY;
 
-        // Mouse Interaction
         const dx = mouse.x - this.x;
         const dy = mouse.y - this.y;
         const distance = Math.sqrt(dx * dx + dy * dy);
@@ -70,7 +65,7 @@ export default function ParticlesBackground() {
       }
 
       draw() {
-        ctx.fillStyle = "rgba(255, 255, 255, 0.8)"; //(White)
+        ctx.fillStyle = "rgba(255, 255, 255, 0.8)";
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
         ctx.closePath();
@@ -92,7 +87,6 @@ export default function ParticlesBackground() {
         particlesArray[i].update();
         particlesArray[i].draw();
 
-        // Connect particles with lines
         for (let j = i; j < particlesArray.length; j++) {
           const dx = particlesArray[i].x - particlesArray[j].x;
           const dy = particlesArray[i].y - particlesArray[j].y;
@@ -100,7 +94,6 @@ export default function ParticlesBackground() {
 
           if (distance < connectionDistance) {
             ctx.beginPath();
-            // Opacity depends on distance (mas malapit, mas malinaw)
             let opacityValue = 1 - distance / connectionDistance;
             ctx.strokeStyle = "rgba(255, 255, 255," + opacityValue * 0.2 + ")"; 
             ctx.lineWidth = 1;
