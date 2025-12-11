@@ -14,7 +14,6 @@ export default function ProjectCard({ project, priority = false }) {
       transition={{ duration: 0.5 }}
       viewport={{ once: true }}
     >
-      {/* 1. IMAGE PREVIEW SECTION */}
       <div className="relative h-48 w-full overflow-hidden bg-gray-800 border-b border-gray-700">
         {project.img ? (
           <Image
@@ -31,7 +30,6 @@ export default function ProjectCard({ project, priority = false }) {
           </div>
         )}
 
-        {/* Project Overlay */}
         {project.link && project.link !== "#" && (
           <a
             href={project.link}
@@ -46,7 +44,6 @@ export default function ProjectCard({ project, priority = false }) {
         )}
       </div>
 
-      {/* 2. CONTENT SECTION */}
       <div className="p-6 flex flex-col grow">
         <div className="flex justify-between items-start mb-2">
           <h2 className="text-xl font-bold text-gray-100 group-hover:text-green-400 transition-colors">
@@ -69,7 +66,6 @@ export default function ProjectCard({ project, priority = false }) {
           {project.description}
         </p>
 
-        {/* 3. TECH STACK BADGES */}
         <div className="mt-auto pt-4 border-t border-gray-800 flex flex-wrap gap-2">
           {project.tech && project.tech.length > 0 ? (
             project.tech.map((tech, index) => (
