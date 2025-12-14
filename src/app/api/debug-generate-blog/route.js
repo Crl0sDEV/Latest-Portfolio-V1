@@ -2,12 +2,10 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 import { createClient } from "@supabase/supabase-js";
 import { NextResponse } from "next/server";
 
-// Force dynamic para hindi i-cache ng Next.js ang response
 export const dynamic = 'force-dynamic';
 
 export async function GET() {
-  // Boss, eto na, binalik ko sa PRO model.
-  // Kung specific na "gemini-3-pro" ang kailangan, palitan mo lang yung string sa baba.
+  
   const currentModelName = "gemini-3-pro-preview"; 
 
   try {
@@ -19,7 +17,6 @@ export async function GET() {
 
     const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
     
-    // Initialize Supabase
     const supabase = createClient(
       process.env.SUPABASE_URL,
       process.env.SUPABASE_SERVICE_ROLE
@@ -42,24 +39,20 @@ export async function GET() {
 
     console.log(`📝 Attempting to generate with model: ${currentModelName}`);
 
-    // Direct fetch na, wala nang fallback para iwas lito sa errors
     const model = genAI.getGenerativeModel({ model: currentModelName });
     const result = await model.generateContent(prompt);
     const response = await result.response;
     const output = response.text();
 
-    // Validation
     if (!output || output.trim().length < 10) {
       throw new Error("Empty response from Gemini");
     }
 
-    // Parse Content (Get Title)
     const lines = output.split("\n").filter(l => l.trim() !== "");
     const cleanTitle = lines[0].replace(/^#|\*/g, "").trim();
 
     console.log(`✅ Gemini Success using [${currentModelName}]! Title:`, cleanTitle);
 
-    // Save to Supabase
     const { data, error: dbError } = await supabase
       .from("blog_posts")
       .insert({
@@ -86,7 +79,6 @@ export async function GET() {
   } catch (error) {
     console.error("❌ API Route Error:", error);
 
-    // Specific handling for Quota/Rate Limit (Error 429)
     if (error.message?.includes("429") || error.message?.includes("quota") || error.status === 429) {
       return NextResponse.json({ 
         error: "Quota Exceeded (Rate Limit).",
@@ -95,7 +87,6 @@ export async function GET() {
       }, { status: 429 });
     }
 
-    // Specific handling for Model Not Found (Error 404)
     if (error.message?.includes("404") || error.message?.includes("not found")) {
       return NextResponse.json({ 
         error: `Model '${currentModelName}' not found.`,
