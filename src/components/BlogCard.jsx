@@ -15,9 +15,7 @@ function cleanMarkdown(content) {
 
 export default function BlogCard({ post, index }) {
   const [isExpanded, setIsExpanded] = useState(false);
-
   const cleanedContent = cleanMarkdown(post.content);
-
   const previewContent = cleanedContent.slice(0, 200) + "...";
 
   return (
@@ -27,7 +25,6 @@ export default function BlogCard({ post, index }) {
           isExpanded ? "h-auto" : "h-full"
         }`}
       >
-        {/* Header Section */}
         <div className="mb-4">
           <div className="flex justify-between items-start mb-2">
             <span className="text-xs text-gray-500 font-mono uppercase tracking-wider">
@@ -51,9 +48,7 @@ export default function BlogCard({ post, index }) {
 
         <div className="w-full h-px bg-linear-to-r from-transparent via-gray-700 to-transparent mb-4 opacity-50"></div>
 
-        {/* Content Body */}
-        <div
-          className={`prose prose-invert prose-sm max-w-none text-gray-400 leading-relaxed ${
+        <div className={`prose prose-invert prose-sm max-w-none text-gray-400 leading-relaxed ${
             !isExpanded ? "line-clamp-4" : ""
           }`}
         >
@@ -62,25 +57,18 @@ export default function BlogCard({ post, index }) {
               remarkPlugins={[remarkGfm]}
               components={{
                 h1: ({ node, ...props }) => (
-                  <h3
-                    className="text-lg font-bold text-green-200 mt-6 mb-3"
-                    {...props}
-                  />
+                  <h3 className="text-lg font-bold text-green-200 mt-6 mb-3" {...props} />
                 ),
                 h2: ({ node, ...props }) => (
-                  <h4
-                    className="text-base font-bold text-green-200 mt-5 mb-2"
-                    {...props}
-                  />
+                  <h4 className="text-base font-bold text-green-200 mt-5 mb-2" {...props} />
                 ),
+                
                 p: ({ node, ...props }) => (
-                  <p className="mb-3 text-gray-300" {...props} />
+                  <div className="mb-3 text-gray-300 block" {...props} />
                 ),
+
                 li: ({ node, ...props }) => (
-                  <li
-                    className="ml-4 list-disc marker:text-green-500"
-                    {...props}
-                  />
+                  <li className="ml-4 list-disc marker:text-green-500" {...props} />
                 ),
                 ul: ({ node, ...props }) => (
                   <ul className="mb-3 pl-2" {...props} />
@@ -88,11 +76,10 @@ export default function BlogCard({ post, index }) {
 
                 code({ node, inline, className, children, ...props }) {
                   const match = /language-(\w+)/.exec(className || "");
-
                   const isBlock = !inline;
 
                   return isBlock ? (
-                    <div className="relative group my-4 rounded-lg overflow-hidden border border-white/10 shadow-lg">
+                    <div className="relative group my-4 rounded-lg overflow-hidden border border-white/10 shadow-lg block w-full"> {/* Ensure it's block w-full */}
                       <div className="flex items-center gap-1.5 px-4 py-2 bg-[#1e1e1e] border-b border-white/5">
                         <div className="w-2.5 h-2.5 rounded-full bg-red-500/80"></div>
                         <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/80"></div>
@@ -102,23 +89,25 @@ export default function BlogCard({ post, index }) {
                         </span>
                       </div>
 
-                      <SyntaxHighlighter
-                        {...props}
-                        style={vscDarkPlus}
-                        language={match ? match[1] : "text"}
-                        PreTag="div"
-                        wrapLongLines="true"
-                        customStyle={{
-                          margin: 0,
-                          padding: "1.5rem",
-                          background: "#0d0d0d",
-                          fontSize: "0.85rem",
-                          lineHeight: "1.5",
-                          minWidth: "100%",
-                        }}
-                      >
-                        {String(children).replace(/\n$/, "")}
-                      </SyntaxHighlighter>
+                      <div className="overflow-x-auto">
+                        <SyntaxHighlighter
+                            {...props}
+                            style={vscDarkPlus}
+                            language={match ? match[1] : "text"}
+                            PreTag="div"
+                            wrapLongLines={true}
+                            customStyle={{
+                            margin: 0,
+                            padding: "1.5rem",
+                            background: "#0d0d0d",
+                            fontSize: "0.85rem",
+                            lineHeight: "1.5",
+                            minWidth: "100%",
+                            }}
+                        >
+                            {String(children).replace(/\n$/, "")}
+                        </SyntaxHighlighter>
+                      </div>
                     </div>
                   ) : (
                     <code
