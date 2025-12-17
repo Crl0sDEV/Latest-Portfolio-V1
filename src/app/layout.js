@@ -2,6 +2,7 @@ import "./globals.css";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import AIWidget from "../components/AIWidget";
+import SnowEffect from "../components/SnowEffect";
 
 export const metadata = {
   title: "Carlos Miguel Sandrino | Web Developer Portfolio",
@@ -85,6 +86,7 @@ export default function RootLayout({ children }) {
         <Navbar />
         <main className="pt-16">{children}</main>
         <Footer />
+        <SnowEffect />
         <AIWidget />
       </body>
     </html>
