@@ -9,7 +9,7 @@ export async function GET() {
   const currentModelName = "gemini-3-pro-preview"; 
 
   try {
-    console.log("🚀 Starting Gemini API Test...");
+    console.log("Starting Gemini API Test...");
 
     if (!process.env.GEMINI_API_KEY) {
       return NextResponse.json({ error: "Missing GEMINI_API_KEY" }, { status: 500 });
@@ -37,7 +37,7 @@ export async function GET() {
       - 2 Paragraphs of content
     `;
 
-    console.log(`📝 Attempting to generate with model: ${currentModelName}`);
+    console.log(`Attempting to generate with model: ${currentModelName}`);
 
     const model = genAI.getGenerativeModel({ model: currentModelName });
     const result = await model.generateContent(prompt);
@@ -51,7 +51,7 @@ export async function GET() {
     const lines = output.split("\n").filter(l => l.trim() !== "");
     const cleanTitle = lines[0].replace(/^#|\*/g, "").trim();
 
-    console.log(`✅ Gemini Success using [${currentModelName}]! Title:`, cleanTitle);
+    console.log(`Gemini Success using [${currentModelName}]! Title:`, cleanTitle);
 
     const { data, error: dbError } = await supabase
       .from("blog_posts")
@@ -62,7 +62,7 @@ export async function GET() {
       .select();
 
     if (dbError) {
-      console.error("❌ Supabase Error:", dbError);
+      console.error("Supabase Error:", dbError);
       return NextResponse.json({ error: "Database error: " + dbError.message }, { status: 500 });
     }
 
@@ -77,7 +77,7 @@ export async function GET() {
     });
 
   } catch (error) {
-    console.error("❌ API Route Error:", error);
+    console.error("API Route Error:", error);
 
     if (error.message?.includes("429") || error.message?.includes("quota") || error.status === 429) {
       return NextResponse.json({ 
