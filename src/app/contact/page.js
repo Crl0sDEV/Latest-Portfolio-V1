@@ -11,7 +11,6 @@ export default function Contact() {
   return (
     <section className="relative w-full min-h-screen py-24 px-4 md:px-8 bg-black text-white flex flex-col items-center overflow-hidden">
 
-      {/* Header Text */}
       <div className="relative z-10 text-center mb-12">
         <Reveal>
           <h1 className="text-3xl md:text-4xl font-bold mb-6">
@@ -26,14 +25,11 @@ export default function Contact() {
           </p>
         </Reveal>
       </div>
-
-      {/* Main Grid Content */}
+      
       <div className="w-full max-w-5xl grid grid-cols-1 md:grid-cols-2 gap-6 relative z-10 pb-20">
         
-        {/* Left Side: Email Card */}
         <EmailCard email="sandrinocarlosmiguel@gmail.com" />
 
-        {/* Right Side: Social Links Grid */}
         <SocialLinks />
 
       </div>
