@@ -57,6 +57,13 @@ export default function Projects() {
       tech: ["Next.js", "Tailwind", "Framer Motion"],
       img: "/projects/portfolio.png",
     },
+    {
+      title: "Samsung Brand Inspired Website",
+      description: "A modern and responsive Samsung Inspired Website built using Next.js, Tailwind CSS, Framer Motion, and Vercel.",
+      link: "https://samsung-s24-website.vercel.app/",
+      tech: ["Next.js", "Tailwind", "Framer Motion"],
+      img: "/projects/samsung.png",
+    }
   ];
 
   return (
