@@ -63,6 +63,14 @@ export default function Projects() {
       link: "https://samsung-s24-website.vercel.app/",
       tech: ["Next.js", "Tailwind", "Framer Motion"],
       img: "/projects/samsung.png",
+    },
+    {
+      title: "E-Commerce Website",
+      description:
+        "A fully functional e-commerce website with product listings, shopping cart, and checkout features.",
+      link: "https://e-commerce-by-carlos.vercel.app/",
+      tech: ["Next.js", "Tailwind CSS", "Zustand"],
+      img: "/projects/ecommerce.png",
     }
   ];
 
