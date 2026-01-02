@@ -1,6 +1,6 @@
 import Reveal from "../../components/Reveal";
 import { createClient } from "@supabase/supabase-js";
-import BlogCard from "../../components/BlogCard";
+import BlogList from "../../components/BlogList";
 
 export const metadata = {
   title: "AI Blog | Carlos Miguel Sandrino",
@@ -15,11 +15,12 @@ export default async function BlogPage() {
     process.env.SUPABASE_SERVICE_ROLE
   );
 
-  const { data: posts, error } = await supabase
+  const { data: initialPosts, error } = await supabase
     .from("blog_posts")
     .select("*")
     .eq('is_published', true) 
-    .order("created_at", { ascending: false });
+    .order("created_at", { ascending: false })
+    .range(0, 5);
 
   if (error) {
     console.error("Error fetching blog posts:", error);
@@ -28,7 +29,7 @@ export default async function BlogPage() {
   return (
     <section className="relative w-full min-h-screen py-24 px-4 md:px-8 text-center overflow-hidden bg-black text-white">
       
-      {/* 1. BACKGROUND ATMOSPHERE (Para consistent sa ibang pages) */}
+      {/* BACKGROUND ATMOSPHERE */}
       <div className="absolute top-0 left-1/4 w-96 h-96 bg-green-500/10 rounded-full blur-[128px] pointer-events-none" />
       <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-[128px] pointer-events-none" />
 
@@ -45,20 +46,16 @@ export default async function BlogPage() {
             </div>
         </Reveal>
 
-        {(!posts || posts.length === 0) && (
+        {(!initialPosts || initialPosts.length === 0) ? (
              <Reveal delay={0.2}>
               <div className="text-gray-500 italic mt-10 py-20 border border-white/5 rounded-2xl bg-zinc-900/50 backdrop-blur-md">
                  <p>No blog posts found yet. Wait for the daily update!</p>
               </div>
              </Reveal>
+        ) : (
+            
+            <BlogList initialPosts={initialPosts} />
         )}
-
-        {/* GRID LAYOUT */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pb-20 items-start">
-            {posts?.map((post, index) => (
-                <BlogCard key={post.id} post={post} index={index} />
-            ))}
-        </div>
 
       </div>
     </section>
