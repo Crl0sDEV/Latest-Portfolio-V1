@@ -1,11 +1,11 @@
+import Reveal from "../../components/Reveal";
+import ProjectCard from "../../components/ProjectCard";
+import { FaTools, FaGithub } from "react-icons/fa";
+
 export const metadata = {
   title: "My Projects | Carlos Miguel Sandrino",
   description: "A showcase of applications and systems developed by Carlos Miguel Sandrino.",
 };
-
-import Reveal from "../../components/Reveal";
-import ProjectCard from "../../components/ProjectCard";
-import { FaTools } from "react-icons/fa";
 
 export default function Projects() {
   const projects = [
@@ -71,54 +71,74 @@ export default function Projects() {
       link: "https://e-commerce-by-carlos.vercel.app/",
       tech: ["Next.js", "Tailwind CSS", "Zustand"],
       img: "/projects/ecommerce.png",
-    }
+    },
   ];
 
   return (
-    <section className="max-w-6xl mx-auto py-24 px-6" id="projects">
+    <section className="relative min-h-screen bg-black text-white py-24 px-6 overflow-hidden">
+      
+      {/* 1. BACKGROUND DECORATION (Subtle Glows) */}
+      <div className="absolute top-0 left-0 w-96 h-96 bg-green-500/10 rounded-full blur-[128px] pointer-events-none" />
+      <div className="absolute bottom-0 right-0 w-96 h-96 bg-blue-500/10 rounded-full blur-[128px] pointer-events-none" />
 
-      <Reveal>
-        <h1 className="text-3xl md:text-4xl font-bold mb-8 text-center text-green-400">Projects</h1>
-      </Reveal>
+      <div className="max-w-6xl mx-auto relative z-10">
+        
+        {/* HEADER */}
+        <div className="mb-16 text-center">
+             <Reveal>
+                <h1 className="text-4xl md:text-5xl font-bold mb-6 tracking-tight">
+                    Featured <span className="text-transparent bg-clip-text bg-linear-to-r from-green-400 to-emerald-600">Projects</span>
+                </h1>
+             </Reveal>
+             
+             <Reveal delay={0.2}>
+                <p className="text-gray-400 max-w-2xl mx-auto text-lg">
+                    A showcase of my technical journey—from IoT systems to modern web applications.
+                </p>
+             </Reveal>
+        </div>
 
-      <Reveal delay={0.2}>
-        <div className="flex justify-center">
-            <div
-            className="mb-12 inline-flex items-center gap-3 px-6 py-3 
-            bg-linear-to-r from-yellow-500/20 via-orange-500/20 to-red-500/20 
-            border border-yellow-500/40 rounded-xl text-yellow-400 
-            backdrop-blur-md shadow-[0_0_15px_rgba(234,179,8,0.3)]"
-            >
-            <FaTools className="text-2xl animate-spin-slow" />
-            <span className="font-medium">
-                This section is still under development — more projects coming soon!
-            </span>
+        {/* UNDER DEVELOPMENT BANNER (More Subtle/Modern) */}
+        <Reveal delay={0.3}>
+            <div className="flex justify-center mb-16">
+                <div className="px-5 py-2 rounded-full bg-yellow-500/10 border border-yellow-500/20 flex items-center gap-3 backdrop-blur-md">
+                    <div className="p-1.5 bg-yellow-500/20 rounded-full animate-pulse">
+                        <FaTools className="text-yellow-500 text-sm" />
+                    </div>
+                    <span className="text-yellow-500/90 text-sm font-medium">
+                        Work in Progress — Adding more projects soon!
+                    </span>
+                </div>
             </div>
-        </div>
-      </Reveal>
+        </Reveal>
 
-      {/* Grid Layout */}
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {projects.map((project, i) => (
-          <Reveal key={i} delay={i * 0.1 + 0.2}>
-            <ProjectCard project={project} priority={i === 0} />
-          </Reveal>
-        ))}
+        {/* PROJECTS GRID */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
+          {projects.map((project, i) => (
+             // Staggered delay for each card
+             <Reveal key={i} delay={0.1 * i}> 
+                <ProjectCard project={project} priority={i === 0} />
+             </Reveal>
+          ))}
+        </div>
+
+        {/* GITHUB CTA */}
+        <Reveal delay={0.2}>
+          <div className="text-center">
+            <a
+              href="https://github.com/Crl0sDEV"
+              target="_blank"
+              className="group inline-flex items-center gap-3 px-8 py-4 rounded-full bg-zinc-900 border border-white/10 hover:border-green-500/50 hover:bg-zinc-800 transition-all duration-300"
+            >
+              <FaGithub className="text-2xl text-white group-hover:text-green-400 transition-colors" />
+              <span className="font-bold text-gray-300 group-hover:text-white transition-colors">
+                  Check out more on GitHub
+              </span>
+            </a>
+          </div>
+        </Reveal>
+
       </div>
-
-      <Reveal delay={0.2}>
-        <div className="mt-12 text-center">
-          <a
-            href="https://github.com/Crl0sDEV"
-            target="_blank"
-            className="inline-flex items-center gap-3 px-6 py-3 rounded-xl 
-            border border-green-500/40 text-green-400 hover:bg-green-500/10 
-            transition-all backdrop-blur-md shadow-[0_0_15px_rgba(74,222,128,0.5)]"
-          >
-            More Projects in my GitHub →
-          </a>
-        </div>
-      </Reveal>
     </section>
   );
 }

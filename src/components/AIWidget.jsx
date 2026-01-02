@@ -1,13 +1,15 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import { motion, AnimatePresence } from "framer-motion"; 
+import { FaPaperPlane, FaRobot, FaTimes, FaComments } from "react-icons/fa"; 
 
 export default function AIWidget() {
   const [isOpen, setIsOpen] = useState(false);
   const [hasSentWelcome, setHasSentWelcome] = useState(false);
   const [messages, setMessages] = useState([]);
   const [currentTyping, setCurrentTyping] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [isTyping, setIsTyping] = useState(false);
   const [input, setInput] = useState("");
   const [showGreeting, setShowGreeting] = useState(false);
   const [greetingText, setGreetingText] = useState("");
@@ -15,20 +17,26 @@ export default function AIWidget() {
   const welcomeLock = useRef(false);
   const messagesEndRef = useRef(null);
 
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
   useEffect(() => {
-    if (messagesEndRef.current) {
-      messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
-    }
-  }, [messages, currentTyping]);
+    scrollToBottom();
+  }, [messages, currentTyping, isTyping]);
 
   const typeText = async (text) => {
+    setIsTyping(false);
     setCurrentTyping("");
     let visibleText = "";
+    
     for (let char of text) {
-      await new Promise((resolve) => setTimeout(resolve, 20));
+      await new Promise((resolve) => setTimeout(resolve, 10));
       visibleText += char;
       setCurrentTyping(visibleText);
+      scrollToBottom();
     }
+    
     setMessages((prev) => [...prev, { role: "assistant", content: text }]);
     setCurrentTyping("");
   };
@@ -39,11 +47,12 @@ export default function AIWidget() {
       if (newState === true && !hasSentWelcome && !welcomeLock.current) {
         welcomeLock.current = true;
         setHasSentWelcome(true);
+        setIsTyping(true); 
         setTimeout(() => {
           typeText(
             "Hello! I'm Carlos’ AI Assistant. Feel free to ask anything — about Carlos, coding, ideas, or any topic you're curious about!"
           );
-        }, 400);
+        }, 800);
       }
       return newState;
     });
@@ -53,9 +62,11 @@ export default function AIWidget() {
     if (!input.trim()) return;
     const userMessage = { role: "user", content: input };
     const newHistory = [...messages, userMessage];
+    
     setMessages(newHistory);
     setInput("");
-    setLoading(true);
+    setIsTyping(true);
+
     try {
       const res = await fetch("/api/ai", {
         method: "POST",
@@ -66,11 +77,11 @@ export default function AIWidget() {
       let aiText = Array.isArray(data)
         ? data[0]?.generated_text || "No response"
         : data.reply || "No response";
-      setLoading(false);
+      
       typeText(aiText);
     } catch (error) {
-      setLoading(false);
-      typeText("Sorry, I encountered an error.");
+      setIsTyping(false);
+      setMessages((prev) => [...prev, { role: "assistant", content: "Sorry, I encountered an error. Please try again." }]);
     }
   };
 
@@ -88,123 +99,145 @@ export default function AIWidget() {
         setShowGreeting(true);
         sessionStorage.setItem("ai_greeting_shown", "true");
         setTimeout(() => setShowGreeting(false), 5000);
-      }, 1200);
+      }, 2000);
     }
   }, []);
 
   return (
     <>
-      {/* FLOATING BUTTON */}
-      <button
+      {/* FLOATING BUTTON (Modern Pulse Effect) */}
+      <motion.button
         onClick={handleOpen}
-        className="fixed bottom-4 right-4 md:bottom-6 md:right-6 bg-white text-green-600 w-14 h-14 rounded-full shadow-xl flex items-center justify-center hover:bg-green-700 transition-all z-50 overflow-hidden p-3"
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.9 }}
+        className="fixed bottom-6 right-6 md:bottom-8 md:right-8 bg-green-500 text-black w-14 h-14 rounded-full shadow-[0_0_20px_rgba(74,222,128,0.4)] flex items-center justify-center hover:bg-green-400 transition-colors z-50 group"
       >
-        {isOpen ? (
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth={2.5}
-            stroke="currentColor"
-            className="w-6 h-6"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M6 18L18 6M6 6l12 12"
-            />
-          </svg>
-        ) : (
-          <img
-            src="/chatbot.svg"
-            alt="Chatbot"
-            className="w-full h-full object-contain"
-          />
+        <div className="absolute inset-0 bg-green-400 rounded-full animate-ping opacity-20 pointer-events-none" />
+        {isOpen ? <FaTimes className="text-xl" /> : <FaRobot className="text-2xl" />}
+      </motion.button>
+
+      {/* GREETING BUBBLE (Animated) */}
+      <AnimatePresence>
+        {showGreeting && !isOpen && (
+            <motion.div
+                initial={{ opacity: 0, y: 10, scale: 0.9 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, y: 10, scale: 0.9 }}
+                className="fixed bottom-24 right-6 md:right-24 bg-zinc-800 border border-green-500/30 text-white px-4 py-3 rounded-2xl rounded-tr-none shadow-xl z-50 max-w-[200px]"
+            >
+                <p className="text-sm font-medium">👋 {greetingText} <br/> <span className="text-gray-400 text-xs">Need help? Chat with AI!</span></p>
+            </motion.div>
         )}
-      </button>
+      </AnimatePresence>
 
-      {/* GREETING BUBBLE */}
-      <div
-        className={`fixed bottom-20 right-4 md:right-24 bg-gray-900 text-gray-200 px-4 py-2 rounded-xl border border-gray-700 shadow-lg text-xs md:text-sm transition-all duration-500 z-50 ${
-          showGreeting
-            ? "opacity-100 translate-y-0"
-            : "opacity-0 translate-y-2 pointer-events-none"
-        }`}
-      >
-       {greetingText} I'm Carlos’ AI Assistant.
-      </div>
-
-      {/* CHAT PANEL */}
-      <div
-        className={`fixed bottom-22 right-4 md:right-6 
-        w-[90vw] max-w-sm md:w-80 
-        bg-gray-900 border border-gray-700 rounded-xl shadow-2xl p-4 
-        transition-all z-51
-        ${
-          isOpen
-            ? "opacity-100 translate-y-0"
-            : "opacity-0 pointer-events-none translate-y-5"
-        }`}
-      >
-        <h2 className="text-green-400 font-bold text-lg mb-3 flex items-center gap-2">
-          <img src="/chatbot.svg" alt="Bot" className="w-6 h-6" />
-          AI Chat Assistant
-        </h2>
-
-        <div className="h-[55vh] md:h-64 overflow-y-auto bg-black border border-gray-700 p-3 rounded-lg space-y-3">
-          {messages.map((msg, i) => (
-            <div
-              key={i}
-              className={`p-2 rounded-lg max-w-[90%] text-sm md:text-base ${
-                msg.role === "user"
-                  ? "bg-green-600 text-white ml-auto"
-                  : "bg-gray-800 text-gray-200"
-              }`}
+      {/* CHAT PANEL (Glassmorphism & AnimatePresence) */}
+      <AnimatePresence>
+        {isOpen && (
+            <motion.div
+                initial={{ opacity: 0, y: 20, scale: 0.95 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, y: 20, scale: 0.95 }}
+                transition={{ duration: 0.2 }}
+                className="fixed bottom-24 right-6 md:right-8 w-[90vw] max-w-[360px] h-[500px] bg-zinc-900/90 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl flex flex-col overflow-hidden z-50"
             >
-              {msg.content}
-            </div>
-          ))}
+                {/* HEADER */}
+                <div className="bg-linear-to-r from-green-600 to-emerald-600 p-4 flex items-center gap-3 shadow-md">
+                    <div className="bg-white/20 p-2 rounded-full backdrop-blur-sm">
+                        <FaRobot className="text-white text-lg" />
+                    </div>
+                    <div>
+                        <h2 className="text-white font-bold text-sm">Carlos' AI Assistant</h2>
+                        <p className="text-green-100 text-xs flex items-center gap-1">
+                            <span className="w-2 h-2 bg-green-300 rounded-full animate-pulse" /> Online
+                        </p>
+                    </div>
+                    <button onClick={() => setIsOpen(false)} className="ml-auto text-white/80 hover:text-white transition">
+                        <FaTimes />
+                    </button>
+                </div>
 
-          {currentTyping && (
-            <div className="bg-gray-800 text-gray-300 p-2 rounded-lg inline-block">
-              {currentTyping}
-              <span className="animate-pulse ml-1">▌</span>
-            </div>
-          )}
+                {/* MESSAGES AREA */}
+                <div className="flex-1 overflow-y-auto p-4 space-y-4 scrollbar-thin scrollbar-thumb-zinc-700 scrollbar-track-transparent">
+                    {/* Welcome Timestamp */}
+                    <div className="text-center text-[10px] text-gray-500 my-2 uppercase tracking-wide">
+                        Today
+                    </div>
 
-          {loading && (
-            <div className="text-gray-400 animate-pulse text-sm">
-              AI is typing...
-            </div>
-          )}
+                    {messages.map((msg, i) => (
+                        <motion.div
+                            key={i}
+                            initial={{ opacity: 0, y: 10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}
+                        >
+                            <div
+                                className={`max-w-[85%] p-3 rounded-2xl text-sm leading-relaxed shadow-sm ${
+                                    msg.role === "user"
+                                        ? "bg-green-600 text-white rounded-tr-none"
+                                        : "bg-zinc-800 text-gray-200 border border-white/5 rounded-tl-none"
+                                }`}
+                            >
+                                {msg.content}
+                            </div>
+                        </motion.div>
+                    ))}
 
-          <div ref={messagesEndRef} />
-        </div>
+                    {/* Typing Animation (Current Stream) */}
+                    {currentTyping && (
+                        <div className="flex justify-start">
+                             <div className="max-w-[85%] p-3 rounded-2xl text-sm leading-relaxed bg-zinc-800 text-gray-200 border border-white/5 rounded-tl-none">
+                                {currentTyping}
+                                <span className="animate-pulse ml-1 inline-block w-1.5 h-4 bg-green-500 align-middle"></span>
+                             </div>
+                        </div>
+                    )}
 
-        {/* INPUT BAR */}
-        <div className="flex gap-2 mt-3">
-          <input
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            onKeyDown={(e) => e.key === "Enter" && sendMessage()}
-            className="flex-1 px-3 py-2 bg-black border border-gray-700 rounded-lg text-white text-sm md:text-base focus:outline-none focus:border-green-500 transition-colors"
-            placeholder="Ask something..."
-          />
-          <button
-            onClick={sendMessage}
-            className="px-3 py-2 bg-green-600 rounded-lg text-white hover:bg-green-700 text-sm md:text-base flex items-center justify-center transition-colors"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="currentColor"
-              className="w-5 h-5 transform -rotate-45 translate-x-0.5"
-            >
-              <path d="M3.478 2.405a.75.75 0 00-.926.94l2.432 7.905H13.5a.75.75 0 010 1.5H4.984l-2.432 7.905a.75.75 0 00.926.94 60.519 60.519 0 0018.445-8.986.75.75 0 000-1.218A60.517 60.517 0 003.478 2.405z" />
-            </svg>
-          </button>
-        </div>
-      </div>
+                    {/* Thinking Indicator (Bouncing Dots) */}
+                    {isTyping && !currentTyping && (
+                        <div className="flex justify-start">
+                             <div className="bg-zinc-800 border border-white/5 px-4 py-3 rounded-2xl rounded-tl-none flex gap-1 items-center">
+                                <motion.div animate={{ y: [0, -5, 0] }} transition={{ repeat: Infinity, duration: 0.6, delay: 0 }} className="w-2 h-2 bg-gray-500 rounded-full" />
+                                <motion.div animate={{ y: [0, -5, 0] }} transition={{ repeat: Infinity, duration: 0.6, delay: 0.2 }} className="w-2 h-2 bg-gray-500 rounded-full" />
+                                <motion.div animate={{ y: [0, -5, 0] }} transition={{ repeat: Infinity, duration: 0.6, delay: 0.4 }} className="w-2 h-2 bg-gray-500 rounded-full" />
+                             </div>
+                        </div>
+                    )}
+                    
+                    <div ref={messagesEndRef} />
+                </div>
+
+                {/* INPUT AREA */}
+                <div className="p-3 bg-zinc-900 border-t border-white/10">
+                    <form 
+                        onSubmit={(e) => { e.preventDefault(); sendMessage(); }}
+                        className="flex gap-2 items-center bg-zinc-800 border border-white/10 rounded-full px-4 py-2 focus-within:border-green-500/50 focus-within:ring-1 focus-within:ring-green-500/20 transition-all"
+                    >
+                        <input
+                            value={input}
+                            onChange={(e) => setInput(e.target.value)}
+                            placeholder="Type a message..."
+                            className="flex-1 bg-transparent text-white text-sm focus:outline-none placeholder-gray-500"
+                        />
+                        <button 
+                            type="submit"
+                            disabled={!input.trim() || isTyping}
+                            className={`p-2 rounded-full transition-all ${
+                                input.trim() 
+                                    ? "bg-green-500 text-black hover:bg-green-400 hover:scale-105" 
+                                    : "bg-zinc-700 text-gray-500 cursor-not-allowed"
+                            }`}
+                        >
+                            <FaPaperPlane className="text-xs" />
+                        </button>
+                    </form>
+                    <div className="text-center mt-2">
+                        <p className="text-[10px] text-gray-600">Powered by Gemini AI</p>
+                    </div>
+                </div>
+
+            </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 }
