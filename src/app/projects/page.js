@@ -72,6 +72,14 @@ export default function Projects() {
       tech: ["Next.js", "Tailwind CSS", "Zustand"],
       img: "/projects/ecommerce.png",
     },
+    {
+      title: "AI-resume-analyzer",
+      description:
+        "An AI-powered resume analyzer that provides feedback and suggestions to improve resumes.",
+      link: "https://ats-radar.vercel.app/",
+      tech: ["Next.js", "Gemini API", "Shadcn UI"],
+      img: "/projects/resume-analyzer.png",
+    },
   ];
 
   return (
