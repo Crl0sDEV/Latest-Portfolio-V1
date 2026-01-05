@@ -24,7 +24,7 @@ export default function Footer() {
         {/* 1. BRAND & SOCIALS */}
         <div className="text-center md:text-left space-y-4 w-full md:w-auto flex flex-col items-center md:items-start">
           <Link href="/" className="text-2xl font-bold text-white tracking-tight">
-            Carlos<span className="text-green-400">Dev</span>
+            Carlos<span className="text-green-400"> / Dev</span>
           </Link>
           <p className="text-sm max-w-xs mx-auto md:mx-0 leading-relaxed">
             Building digital experiences with code and creativity.
