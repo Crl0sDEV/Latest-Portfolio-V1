@@ -10,6 +10,37 @@ export const metadata = {
 export default function Projects() {
   const projects = [
     {
+      title: "Listahan App",
+      description:
+        "A digital ledger for Sari-sari stores featuring real-time debt tracking, dashboard analytics, secure auth, and dark mode.",
+      link: "https://listahan-app.vercel.app/",
+      tech: ["Next.js", "Supabase", "Shadcn UI"],
+      img: "/projects/listahan-app.png",
+    },
+    {
+      title: "AI-resume-analyzer",
+      description:
+        "An AI-powered resume analyzer that provides feedback and suggestions to improve resumes.",
+      link: "https://ats-radar.vercel.app/",
+      tech: ["Next.js", "Gemini API", "Shadcn UI"],
+      img: "/projects/resume-analyzer.png",
+    },
+    {
+      title: "E-Commerce Website",
+      description:
+        "A fully functional e-commerce website with product listings, shopping cart, and checkout features.",
+      link: "https://e-commerce-by-carlos.vercel.app/",
+      tech: ["Next.js", "Tailwind CSS", "Zustand"],
+      img: "/projects/ecommerce.png",
+    },
+    {
+      title: "Samsung Brand Inspired Website",
+      description: "A modern and responsive Samsung Inspired Website built using Next.js, Tailwind CSS, Framer Motion, and Vercel.",
+      link: "https://samsung-s24-website.vercel.app/",
+      tech: ["Next.js", "Tailwind", "Framer Motion"],
+      img: "/projects/samsung.png",
+    },
+    {
       title: "Capstone Title Generator",
       description:
         "An AI-powered generator that creates thesis and capstone titles for BSIT, BSCS, and BSIS students.",
@@ -57,29 +88,7 @@ export default function Projects() {
       tech: ["Next.js", "Tailwind", "Framer Motion"],
       img: "/projects/portfolio.png",
     },
-    {
-      title: "Samsung Brand Inspired Website",
-      description: "A modern and responsive Samsung Inspired Website built using Next.js, Tailwind CSS, Framer Motion, and Vercel.",
-      link: "https://samsung-s24-website.vercel.app/",
-      tech: ["Next.js", "Tailwind", "Framer Motion"],
-      img: "/projects/samsung.png",
-    },
-    {
-      title: "E-Commerce Website",
-      description:
-        "A fully functional e-commerce website with product listings, shopping cart, and checkout features.",
-      link: "https://e-commerce-by-carlos.vercel.app/",
-      tech: ["Next.js", "Tailwind CSS", "Zustand"],
-      img: "/projects/ecommerce.png",
-    },
-    {
-      title: "AI-resume-analyzer",
-      description:
-        "An AI-powered resume analyzer that provides feedback and suggestions to improve resumes.",
-      link: "https://ats-radar.vercel.app/",
-      tech: ["Next.js", "Gemini API", "Shadcn UI"],
-      img: "/projects/resume-analyzer.png",
-    },
+    
   ];
 
   return (
@@ -93,17 +102,17 @@ export default function Projects() {
         
         {/* HEADER */}
         <div className="mb-16 text-center">
-             <Reveal>
+              <Reveal>
                 <h1 className="text-4xl md:text-5xl font-bold mb-6 tracking-tight">
                     Featured <span className="text-transparent bg-clip-text bg-linear-to-r from-green-400 to-emerald-600">Projects</span>
                 </h1>
-             </Reveal>
-             
-             <Reveal delay={0.2}>
+              </Reveal>
+              
+              <Reveal delay={0.2}>
                 <p className="text-gray-400 max-w-2xl mx-auto text-lg">
                     A showcase of my technical journey—from IoT systems to modern web applications.
                 </p>
-             </Reveal>
+              </Reveal>
         </div>
 
         {/* UNDER DEVELOPMENT BANNER (More Subtle/Modern) */}
