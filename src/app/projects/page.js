@@ -10,6 +10,14 @@ export const metadata = {
 export default function Projects() {
   const projects = [
     {
+      title: "Ma anong Ulam?",
+      description:
+        "A Website that suggests random dishes to cook based on available ingredients using Gemini AI.",
+      link: "https://ma-ano-ulam-cms.vercel.app/",
+      tech: ["Next.js", "Gemini API", "Tailwind CSS"],
+      img: "/projects/ma-anong-ulam.png",
+    },
+    {
       title: "Listahan App",
       description:
         "A digital ledger for Sari-sari stores featuring real-time debt tracking, dashboard analytics, secure auth, and dark mode.",
