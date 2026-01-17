@@ -2,7 +2,7 @@
 
 import { createClient } from "@supabase/supabase-js";
 
-export async function getMorePosts(offset = 0, limit = 6) {
+export async function getMorePosts(offset = 0, limit = 3) {
   const supabase = createClient(
     process.env.SUPABASE_URL,
     process.env.SUPABASE_SERVICE_ROLE

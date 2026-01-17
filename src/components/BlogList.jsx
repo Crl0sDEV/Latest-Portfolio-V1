@@ -10,7 +10,7 @@ export default function BlogList({ initialPosts }) {
   const [offset, setOffset] = useState(initialPosts.length);
   const [loading, setLoading] = useState(false);
   const [hasMore, setHasMore] = useState(true);
-  const POSTS_PER_PAGE = 6;
+  const POSTS_PER_PAGE = 3;
 
   const loadMore = async () => {
     setLoading(true);

@@ -20,7 +20,7 @@ export default async function BlogPage() {
     .select("*")
     .eq('is_published', true) 
     .order("created_at", { ascending: false })
-    .range(0, 5);
+    .range(0, 2);
 
   if (error) {
     console.error("Error fetching blog posts:", error);
