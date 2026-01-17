@@ -5,7 +5,7 @@ import Image from "next/image";
 import { FaExternalLinkAlt, FaGithub, FaCode } from "react-icons/fa";
 
 export default function ProjectCard({ project, priority = false }) {
-  // --- SPOTLIGHT LOGIC ---
+  
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
 
@@ -24,7 +24,6 @@ export default function ProjectCard({ project, priority = false }) {
       transition={{ duration: 0.5 }}
       viewport={{ once: true }}
     >
-      {/* 1. SPOTLIGHT EFFECT LAYER */}
       <motion.div
         className="pointer-events-none absolute -inset-px rounded-2xl opacity-0 transition duration-300 group-hover:opacity-100 z-10"
         style={{
@@ -40,7 +39,6 @@ export default function ProjectCard({ project, priority = false }) {
 
       <div className="relative h-full flex flex-col z-20">
         
-        {/* 2. IMAGE SECTION */}
         <div className="relative h-56 w-full overflow-hidden border-b border-white/5 bg-zinc-800/50 group-hover:border-green-500/30 transition-colors duration-500">
           {project.img ? (
             <Image
@@ -57,7 +55,6 @@ export default function ProjectCard({ project, priority = false }) {
             </div>
           )}
 
-          {/* OVERLAY BUTTON (Visit Site) */}
           {project.link && project.link !== "#" && (
             <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center backdrop-blur-[2px]">
                <a
@@ -74,17 +71,15 @@ export default function ProjectCard({ project, priority = false }) {
           )}
         </div>
 
-        {/* 3. CONTENT SECTION */}
         <div className="p-6 flex flex-col grow bg-zinc-900/40 backdrop-blur-sm">
           
           <div className="flex justify-between items-start mb-3">
              <h2 className="text-xl font-bold text-gray-100 group-hover:text-green-400 transition-colors duration-300 leading-tight">
                {project.title}
              </h2>
-             
-             {/* Optional: GitHub Link icon kung meron, or just external link */}
+            
              <div className="flex gap-3 text-gray-500">
-                 {/* Pwede mo dagdagan ng github link field sa data mo if meron */}
+                
                  {project.link && project.link !== "#" && (
                     <a href={project.link} target="_blank" className="hover:text-green-400 transition-colors">
                         <FaExternalLinkAlt />

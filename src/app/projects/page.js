@@ -110,7 +110,6 @@ export default function Projects() {
   return (
     <section className="relative min-h-screen bg-black text-white py-24 px-6 overflow-hidden">
       
-      {/* 1. BACKGROUND DECORATION (Subtle Glows) */}
       <div className="absolute top-0 left-0 w-96 h-96 bg-green-500/10 rounded-full blur-[128px] pointer-events-none" />
       <div className="absolute bottom-0 right-0 w-96 h-96 bg-blue-500/10 rounded-full blur-[128px] pointer-events-none" />
 
@@ -131,7 +130,6 @@ export default function Projects() {
               </Reveal>
         </div>
 
-        {/* UNDER DEVELOPMENT BANNER (More Subtle/Modern) */}
         <Reveal delay={0.3}>
             <div className="flex justify-center mb-16">
                 <div className="px-5 py-2 rounded-full bg-yellow-500/10 border border-yellow-500/20 flex items-center gap-3 backdrop-blur-md">
@@ -145,17 +143,15 @@ export default function Projects() {
             </div>
         </Reveal>
 
-        {/* PROJECTS GRID */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
           {projects.map((project, i) => (
-             // Staggered delay for each card
+             
              <Reveal key={i} delay={0.1 * i}> 
                 <ProjectCard project={project} priority={i === 0} />
              </Reveal>
           ))}
         </div>
 
-        {/* GITHUB CTA */}
         <Reveal delay={0.2}>
           <div className="text-center">
             <a

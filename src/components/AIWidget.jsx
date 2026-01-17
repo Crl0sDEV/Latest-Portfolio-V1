@@ -118,13 +118,11 @@ export default function AIWidget() {
 
   return (
     <>
-      {/* FLOATING BUTTON - Removed complex shadow for mobile performance */}
       <motion.button
         onClick={handleOpen}
         whileTap={{ scale: 0.9 }}
         className="fixed bottom-6 right-6 md:bottom-8 md:right-8 bg-green-500 text-black w-14 h-14 rounded-full shadow-lg flex items-center justify-center z-50 group"
       >
-        {/* Simplified Pulse - standard CSS animation is lighter than framer motion for infinite loops */}
         <div className="absolute inset-0 bg-green-400 rounded-full animate-ping opacity-20 pointer-events-none" />
         {isOpen ? (
           <FaTimes className="text-xl" />
@@ -133,7 +131,6 @@ export default function AIWidget() {
         )}
       </motion.button>
 
-      {/* GREETING BUBBLE */}
       <AnimatePresence>
         {showGreeting && !isOpen && (
           <motion.div
@@ -152,7 +149,6 @@ export default function AIWidget() {
         )}
       </AnimatePresence>
 
-      {/* CHAT PANEL */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
@@ -162,7 +158,7 @@ export default function AIWidget() {
             transition={{ duration: 0.2, ease: "easeOut" }}
             className="fixed bottom-24 right-6 md:right-8 w-[90vw] max-w-[360px] h-[500px] bg-zinc-900 border border-white/10 rounded-2xl shadow-2xl flex flex-col overflow-hidden z-50"
           >
-            {/* HEADER */}
+    
             <div className="bg-linear-to-r from-green-600 to-emerald-600 p-4 flex items-center gap-3 shadow-md">
               <div className="bg-white/20 p-2 rounded-full">
                 <FaRobot className="text-white text-lg" />
@@ -223,7 +219,7 @@ export default function AIWidget() {
               {isTyping && !currentTyping && (
                 <div className="flex justify-start">
                   <div className="bg-zinc-800 border border-white/5 px-4 py-3 rounded-2xl rounded-tl-none flex gap-1 items-center">
-                    {/* Simplified animation for dots */}
+                 
                     <div className="w-2 h-2 bg-gray-500 rounded-full animate-bounce [animation-delay:-0.3s]" />
                     <div className="w-2 h-2 bg-gray-500 rounded-full animate-bounce [animation-delay:-0.15s]" />
                     <div className="w-2 h-2 bg-gray-500 rounded-full animate-bounce" />

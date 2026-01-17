@@ -56,7 +56,7 @@ export default function Navbar() {
       transition={{ duration: 0.6 }}
     >
       <div className="max-w-6xl mx-auto px-5 flex justify-between items-center">
-        {/* LOGO */}
+        
         <Link
           href="/"
           className="text-xl font-bold cursor-pointer relative group z-50"
@@ -64,7 +64,6 @@ export default function Navbar() {
           Carlos<span className="text-green-400"> / Dev</span>
         </Link>
 
-        {/* DESKTOP LINKS */}
         <div className="hidden md:flex space-x-1">
           {navLinks.map((link) => {
             const isActive = pathname === link.href;
@@ -106,7 +105,6 @@ export default function Navbar() {
         </button>
       </div>
 
-      {/* MOBILE MENU DRAWER */}
       <AnimatePresence>
         {isOpen && (
           <>
@@ -118,7 +116,7 @@ export default function Navbar() {
               onClick={() => setIsOpen(false)}
               className="fixed inset-0 bg-black/80 z-40 md:hidden"
             />
-            {/* SIDEBAR */}
+            
             <motion.div
               initial={{ x: "100%" }}
               animate={{ x: 0 }}

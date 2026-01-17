@@ -29,7 +29,6 @@ export default async function BlogPage() {
   return (
     <section className="relative w-full min-h-screen py-24 px-4 md:px-8 text-center overflow-hidden bg-black text-white">
       
-      {/* BACKGROUND ATMOSPHERE */}
       <div className="absolute top-0 left-1/4 w-96 h-96 bg-green-500/10 rounded-full blur-[128px] pointer-events-none" />
       <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-[128px] pointer-events-none" />
 

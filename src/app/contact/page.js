@@ -11,7 +11,6 @@ export default function Contact() {
   return (
     <section className="relative w-full min-h-screen py-24 px-4 md:px-8 bg-black text-white flex flex-col items-center overflow-hidden">
 
-      {/* 1. BACKGROUND ATMOSPHERE (Blobs) */}
       <div className="absolute top-0 left-1/4 w-96 h-96 bg-green-500/10 rounded-full blur-[128px] pointer-events-none" />
       <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-[128px] pointer-events-none" />
 
@@ -29,15 +28,12 @@ export default function Contact() {
         </Reveal>
       </div>
       
-      {/* 2. GRID LAYOUT */}
       <div className="w-full max-w-5xl grid grid-cols-1 lg:grid-cols-2 gap-8 relative z-10 pb-20">
         
-        {/* Left Side: Email Card */}
         <div className="h-full">
            <EmailCard email="sandrinocarlosmiguel@gmail.com" />
         </div>
 
-        {/* Right Side: Social Links Grid */}
         <div className="h-full">
            <SocialLinks />
         </div>

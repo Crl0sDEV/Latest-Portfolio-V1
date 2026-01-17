@@ -42,7 +42,6 @@ const socialLinks = [
   },
 ];
 
-// --- SUB-COMPONENT: SPOTLIGHT CARD FOR LINKS ---
 function SocialCard({ social }) {
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
@@ -61,7 +60,6 @@ function SocialCard({ social }) {
       onMouseMove={handleMouseMove}
       className="group relative bg-zinc-900 border border-white/10 p-6 rounded-2xl flex flex-col items-center transition-all overflow-hidden h-full justify-center"
     >
-      {/* GLOW EFFECT */}
       <motion.div
         className="pointer-events-none absolute -inset-px rounded-2xl opacity-0 transition duration-300 group-hover:opacity-100"
         style={{

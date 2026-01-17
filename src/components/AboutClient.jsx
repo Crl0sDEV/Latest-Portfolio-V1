@@ -92,11 +92,9 @@ export default function AboutClient() {
   return (
     <section className="max-w-6xl mx-auto py-24 px-6 relative overflow-hidden">
       
-      {/* Background Glows */}
       <div className="absolute top-0 left-1/4 w-96 h-96 bg-green-500/10 rounded-full blur-[128px] pointer-events-none" />
       <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-[128px] pointer-events-none" />
 
-      {/* --- INTRO SECTION --- */}
       <div className="mb-20 text-center max-w-3xl mx-auto">
         <Reveal>
             <h1 className="text-4xl md:text-6xl font-bold mb-6 tracking-tight">
@@ -112,11 +110,8 @@ export default function AboutClient() {
         </Reveal>
       </div>
 
-      {/* --- GRID LAYOUT --- */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-24">
         
-        {/* LEFT: BIO */}
-        {/* GAMIT NA NATIN ANG REVEAL DITO */}
         <Reveal delay={0.3}>
           <SpotlightCard className="p-8 h-full">
             <h3 className="text-2xl font-bold text-white mb-4">The Journey</h3>
@@ -129,7 +124,6 @@ export default function AboutClient() {
           </SpotlightCard>
         </Reveal>
 
-        {/* RIGHT: SOFT SKILLS */}
         <Reveal delay={0.4}>
           <SpotlightCard className="p-8 h-full">
             <h3 className="text-2xl font-bold text-white mb-6">Soft Skills</h3>
@@ -145,7 +139,6 @@ export default function AboutClient() {
         </Reveal>
       </div>
 
-      {/* --- TECH STACK --- */}
       <div className="space-y-16">
         <Section title="Frontend Arsenal" skills={skillsData.frontend} delay={0.5} />
         <Section title="Backend Powerhouse" skills={skillsData.backend} delay={0.6} />

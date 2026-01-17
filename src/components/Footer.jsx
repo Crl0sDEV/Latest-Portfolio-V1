@@ -15,13 +15,10 @@ export default function Footer() {
   return (
     <footer className="relative w-full bg-black border-t border-white/10 pt-16 pb-8 px-6 text-gray-400 overflow-hidden">
       
-      {/* Background Glow */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-3xl h-1 bg-linear-to-r from-transparent via-green-500/50 to-transparent opacity-50" />
       
-      {/* MAIN CONTAINER: Flex-Column sa Mobile, Flex-Row sa Desktop */}
       <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center md:items-start gap-10 md:gap-0">
         
-        {/* 1. BRAND & SOCIALS */}
         <div className="text-center md:text-left space-y-4 w-full md:w-auto flex flex-col items-center md:items-start">
           <Link href="/" className="text-2xl font-bold text-white tracking-tight">
             Carlos<span className="text-green-400"> / Dev</span>
@@ -37,9 +34,8 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* 2. QUICK LINKS (Grid sa Mobile para pantay) */}
         <div className="w-full md:w-auto flex flex-col md:flex-row gap-8 md:gap-16 text-center md:text-left">
-            {/* Pages */}
+          
             <div className="flex flex-col gap-3">
                 <h4 className="text-white font-bold mb-1">Explore</h4>
                 <FooterLink href="/" text="Home" />
@@ -47,7 +43,6 @@ export default function Footer() {
                 <FooterLink href="/projects" text="Projects" />
             </div>
             
-            {/* Connect */}
             <div className="flex flex-col gap-3">
                 <h4 className="text-white font-bold mb-1">Connect</h4>
                 <FooterLink href="/blog" text="Blog" />
@@ -55,7 +50,6 @@ export default function Footer() {
             </div>
         </div>
 
-        {/* 3. BACK TO TOP BUTTON */}
         <div className="flex flex-col items-center md:items-end gap-3">
             <button 
                 onClick={scrollToTop}
@@ -68,7 +62,6 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* COPYRIGHT SECTION */}
       <div className="max-w-6xl mx-auto mt-12 pt-8 border-t border-white/5 flex flex-col-reverse md:flex-row justify-between items-center gap-4 text-xs text-zinc-500 text-center md:text-left">
         <p>
             © {new Date().getFullYear()} Carlos Miguel Sandrino.
@@ -82,7 +75,6 @@ export default function Footer() {
   );
 }
 
-// --- HELPER COMPONENTS ---
 
 function SocialIcon({ href, icon }) {
     return (

@@ -3,26 +3,25 @@
 import { useState } from "react";
 import BlogCard from "./BlogCard";
 import Reveal from "./Reveal";
-import { getMorePosts } from "../app/actions/getBlogPosts"; // Import yung action
+import { getMorePosts } from "../app/actions/getBlogPosts";
 
 export default function BlogList({ initialPosts }) {
   const [posts, setPosts] = useState(initialPosts);
-  const [offset, setOffset] = useState(initialPosts.length); // Start after initial
+  const [offset, setOffset] = useState(initialPosts.length);
   const [loading, setLoading] = useState(false);
-  const [hasMore, setHasMore] = useState(true); // Check if may laman pa
+  const [hasMore, setHasMore] = useState(true);
   const POSTS_PER_PAGE = 6;
 
   const loadMore = async () => {
     setLoading(true);
-    
-    // Tawagin ang Server Action
+
     const newPosts = await getMorePosts(offset, POSTS_PER_PAGE);
 
     if (newPosts.length < POSTS_PER_PAGE) {
-      setHasMore(false); // Wala nang next page
+      setHasMore(false);
     }
 
-    setPosts((prev) => [...prev, ...newPosts]); // Dugtong sa dulo
+    setPosts((prev) => [...prev, ...newPosts]);
     setOffset((prev) => prev + POSTS_PER_PAGE);
     setLoading(false);
   };
@@ -35,30 +34,32 @@ export default function BlogList({ initialPosts }) {
         ))}
       </div>
 
-      {/* LOAD MORE BUTTON */}
       {hasMore && (
         <Reveal>
-            <div className="flex justify-center pb-20">
+          <div className="flex justify-center pb-20">
             <button
-                onClick={loadMore}
-                disabled={loading}
-                className="group relative px-8 py-3 rounded-full bg-zinc-900 border border-white/10 hover:border-green-500/50 hover:bg-zinc-800 transition-all active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
+              onClick={loadMore}
+              disabled={loading}
+              className="group relative px-8 py-3 rounded-full bg-zinc-900 border border-white/10 hover:border-green-500/50 hover:bg-zinc-800 transition-all active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
             >
-                <span className={`text-sm font-bold text-gray-300 group-hover:text-green-400 flex items-center gap-2 ${loading ? "animate-pulse" : ""}`}>
+              <span
+                className={`text-sm font-bold text-gray-300 group-hover:text-green-400 flex items-center gap-2 ${
+                  loading ? "animate-pulse" : ""
+                }`}
+              >
                 {loading ? "Loading Posts..." : "Load More Articles"}
-                </span>
-                
-                {/* Glow Effect */}
-                <div className="absolute inset-0 rounded-full bg-green-500/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity" />
+              </span>
+
+              <div className="absolute inset-0 rounded-full bg-green-500/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity" />
             </button>
-            </div>
+          </div>
         </Reveal>
       )}
 
       {!hasMore && posts.length > 0 && (
-         <div className="text-center pb-20 text-gray-600 text-sm">
-            You've reached the end of the archives.
-         </div>
+        <div className="text-center pb-20 text-gray-600 text-sm">
+          You've reached the end of the archives.
+        </div>
       )}
     </>
   );
