@@ -140,8 +140,8 @@ export default function AboutClient() {
       </div>
 
       <div className="space-y-16">
-        <Section title="Frontend Arsenal" skills={skillsData.frontend} delay={0.5} />
-        <Section title="Backend Powerhouse" skills={skillsData.backend} delay={0.6} />
+        <Section title="Frontend" skills={skillsData.frontend} delay={0.5} />
+        <Section title="Backend" skills={skillsData.backend} delay={0.6} />
         <Section title="Mobile & Tools" skills={[...skillsData.mobile, ...skillsData.tools]} delay={0.7} />
       </div>
 
