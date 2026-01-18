@@ -108,7 +108,7 @@ export default function Projects() {
   ];
 
   return (
-    <section className="relative min-h-screen bg-black text-white py-24 px-6 overflow-hidden">
+    <section className="relative min-h-screen bg-black text-white py-24 lg:py-8 px-6 overflow-hidden">
       
       <div className="absolute top-0 left-0 w-96 h-96 bg-green-500/10 rounded-full blur-[128px] pointer-events-none" />
       <div className="absolute bottom-0 right-0 w-96 h-96 bg-blue-500/10 rounded-full blur-[128px] pointer-events-none" />
