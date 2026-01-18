@@ -44,7 +44,7 @@ function SpotlightCard({ children, className = "" }) {
 
 export default function Home() {
   return (
-    <main className="relative w-full min-h-screen bg-black text-white px-6 flex flex-col items-center justify-center overflow-hidden ">
+    <main className="relative w-full min-h-screen bg-black text-white px-6 flex flex-col items-center justify-center overflow-hidden py-10 lg:py-0">
       <ParticlesBackground />
 
       <div className="absolute top-0 left-1/4 w-96 h-96 bg-green-500/10 rounded-full blur-[128px] pointer-events-none" />
