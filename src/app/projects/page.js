@@ -115,7 +115,6 @@ export default function Projects() {
 
       <div className="max-w-6xl mx-auto relative z-10">
         
-        {/* HEADER */}
         <div className="mb-16 text-center">
               <Reveal>
                 <h1 className="text-4xl md:text-5xl font-bold mb-6 tracking-tight">
