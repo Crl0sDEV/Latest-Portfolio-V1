@@ -95,7 +95,6 @@ export default function Navbar() {
           })}
         </div>
 
-        {/* HAMBURGER BUTTON */}
         <button
           onClick={() => setIsOpen(true)}
           className="md:hidden text-2xl text-white focus:outline-none hover:text-green-400 transition z-50"
