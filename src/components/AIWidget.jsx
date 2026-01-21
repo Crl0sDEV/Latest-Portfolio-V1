@@ -230,7 +230,6 @@ export default function AIWidget() {
               <div ref={messagesEndRef} />
             </div>
 
-            {/* INPUT AREA */}
             <div className="p-3 bg-zinc-900 border-t border-white/10">
               <form
                 onSubmit={(e) => {
