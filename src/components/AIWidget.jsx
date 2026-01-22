@@ -205,7 +205,6 @@ export default function AIWidget() {
                 </div>
               ))}
 
-              {/* Stream Text */}
               {currentTyping && (
                 <div className="flex justify-start">
                   <div className="max-w-[85%] p-3 rounded-2xl text-sm leading-relaxed bg-zinc-800 text-gray-200 border border-white/5 rounded-tl-none">
@@ -215,7 +214,6 @@ export default function AIWidget() {
                 </div>
               )}
 
-              {/* Thinking Dots */}
               {isTyping && !currentTyping && (
                 <div className="flex justify-start">
                   <div className="bg-zinc-800 border border-white/5 px-4 py-3 rounded-2xl rounded-tl-none flex gap-1 items-center">
