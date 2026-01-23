@@ -180,7 +180,6 @@ export default function AIWidget() {
               </button>
             </div>
 
-            {/* MESSAGES AREA - Added will-change-scroll for hints */}
             <div className="flex-1 overflow-y-auto p-4 space-y-4 scrollbar-thin scrollbar-thumb-zinc-700 scrollbar-track-transparent overscroll-contain">
               <div className="text-center text-[10px] text-gray-500 my-2 uppercase tracking-wide">
                 Today
