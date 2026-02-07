@@ -10,6 +10,20 @@ export const metadata = {
 export default function Projects() {
   const projects = [
     {
+      title: "Rolyo Laundry Services | Cabanatuan City",
+      description: "Premier laundry services in Cabanatuan. Wash, Dry, Fold, and Delivery.",
+      link: "https://rolyo.vercel.app/",
+      tech: ["Next.js", "Tailwind CSS", "Framer Motion", "Lucid React"],
+      img: "/projects/rolyo.png",
+    },
+    {
+      title: "Tinig | Mga Bulong sa Kalawakan",
+      description: "Ang mga salitang hindi masabi, sa bituin na lang ibubulong. Isang ligtas na espasyo para sa iyong mga kinikimkim.",
+      link: "https://tinig.vercel.app/",
+      tech: ["Next.js", "Tailwind CSS", "Framer Motion", "Vercel"],
+      img: "/projects/tinig.png",
+    },
+    {
       title: "Luxury Real Estate Landing Page",
       description:
         "A pixel-perfect, mobile-first real estate website featuring PWA installability, interactive galleries, and a high-end UI design.",
