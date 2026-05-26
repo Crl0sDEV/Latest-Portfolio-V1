@@ -10,6 +10,13 @@ export const metadata = {
 export default function Projects() {
   const projects = [
     {
+      title: "ApplyflowPH",
+      description: "Track your job applications offline and online with ApplyflowPH. A comprehensive job application tracker designed to help you manage your job search effectively.",
+      link: "https://applyflowph.vercel.app/",
+      tech: ["Next.js", "Tailwind CSS", "Supabase", "Shadcn UI"],
+      img: "/projects/applyflowph.png",
+    },
+    {
       title: "Rolyo Laundry Services | Cabanatuan City",
       description: "Premier laundry services in Cabanatuan. Wash, Dry, Fold, and Delivery.",
       link: "https://rolyo.vercel.app/",
