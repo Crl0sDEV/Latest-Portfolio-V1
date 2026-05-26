@@ -20,13 +20,6 @@ const socialLinks = [
     username: "Crl0sDEV",
   },
   {
-    name: "Telegram",
-    icon: <FaTelegram />,
-    url: "https://t.me/Crlsm23",
-    color: "text-blue-400",
-    username: "@Crlsm23",
-  },
-  {
     name: "Facebook",
     icon: <FaFacebook />,
     url: "https://www.facebook.com/KreizzyCarl",
