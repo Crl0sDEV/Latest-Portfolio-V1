@@ -7,7 +7,7 @@ export const metadata = {
   description: "Daily AI-generated blog posts by Carlos Miguel Sandrino.",
 };
 
-export const revalidate = 0; 
+export const revalidate = 3600; // Cache for 1 hour to prevent lag
 
 export default async function BlogPage() {
   const supabase = createClient(
@@ -27,19 +27,20 @@ export default async function BlogPage() {
   }
 
   return (
-    <section className="relative w-full min-h-screen py-24 lg:py-8 px-4 md:px-8 text-center overflow-hidden bg-black text-white">
+    <section className="relative w-full min-h-screen py-24 lg:py-16 px-4 md:px-8 text-center overflow-hidden bg-[var(--background)] text-[var(--foreground)]">
       
-      <div className="absolute top-0 left-1/4 w-96 h-96 bg-green-500/10 rounded-full blur-[128px] pointer-events-none" />
-      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-[128px] pointer-events-none" />
+      {/* Soft, neutral glowing background blobs */}
+      <div className="absolute top-0 left-1/4 w-96 h-96 bg-[var(--muted)] rounded-full blur-[120px] pointer-events-none opacity-50" />
+      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-[var(--accent)] rounded-full blur-[120px] pointer-events-none opacity-30" />
 
-      <div className="relative z-10 max-w-6xl mx-auto">
+      <div className="relative max-w-6xl mx-auto">
 
         <Reveal>
             <div className="mb-16">
-                <h1 className="text-4xl md:text-5xl font-bold mb-6 tracking-tight">
-                    Daily <span className="text-transparent bg-clip-text bg-linear-to-r from-green-400 to-emerald-600">AI Insights</span>
+                <h1 className="text-3xl md:text-4xl font-extrabold mb-6 tracking-tight">
+                    Daily <span className="text-transparent bg-clip-text bg-gradient-to-r from-[var(--foreground)] to-[var(--muted-foreground)]">AI Insights</span>
                 </h1>
-                <p className="text-gray-400 max-w-2xl mx-auto text-lg leading-relaxed">
+                <p className="text-[var(--muted-foreground)] max-w-2xl mx-auto text-lg leading-relaxed font-light">
                     Exploring technology, code, and creativity through the lens of Artificial Intelligence.
                 </p>
             </div>
@@ -47,7 +48,7 @@ export default async function BlogPage() {
 
         {(!initialPosts || initialPosts.length === 0) ? (
              <Reveal delay={0.2}>
-              <div className="text-gray-500 italic mt-10 py-20 border border-white/5 rounded-2xl bg-zinc-900/50 backdrop-blur-md">
+              <div className="text-[var(--muted-foreground)] italic mt-10 py-20 border border-[var(--border)] rounded-2xl bg-[var(--muted)]/20 backdrop-blur-md">
                  <p>No blog posts found yet. Wait for the daily update!</p>
               </div>
              </Reveal>

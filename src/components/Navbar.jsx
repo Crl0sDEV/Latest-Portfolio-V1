@@ -3,13 +3,21 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { useState, useEffect, useCallback } from "react";
-import { FaBars, FaTimes } from "react-icons/fa";
+import { useState, useEffect } from "react";
+import { Menu, X, Moon, Sun, Laptop } from "lucide-react";
+import { useTheme } from "next-themes";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
+  const { theme, setTheme, resolvedTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  // Avoid hydration mismatch by waiting for mount
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const navLinks = [
     { name: "Home", href: "/" },
@@ -20,21 +28,12 @@ export default function Navbar() {
   ];
 
   useEffect(() => {
-    let lastScrollY = window.scrollY;
-
     const handleScroll = () => {
-      const currentScrollY = window.scrollY;
-      const isScrolled = currentScrollY > 20;
-
-      if (isScrolled !== scrolled) {
-        setScrolled(isScrolled);
-      }
-      lastScrollY = currentScrollY;
+      setScrolled(window.scrollY > 20);
     };
-
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [scrolled]);
+  }, []);
 
   useEffect(() => {
     if (isOpen) {
@@ -44,12 +43,16 @@ export default function Navbar() {
     }
   }, [isOpen]);
 
+  const toggleTheme = () => {
+    setTheme(resolvedTheme === "dark" ? "light" : "dark");
+  };
+
   return (
     <motion.nav
-      className={`w-full fixed top-0 left-0 z-50 transition-all duration-300 ${
+      className={`w-full fixed top-0 left-0 z-50 transition-all duration-300 border-b ${
         scrolled
-          ? "bg-black/90 backdrop-blur-md py-3 shadow-lg"
-          : "bg-transparent py-5"
+          ? "bg-[var(--background)]/80 backdrop-blur-md py-3 border-[var(--border)] shadow-sm"
+          : "bg-transparent py-5 border-transparent"
       }`}
       initial={{ y: -100 }}
       animate={{ y: 0 }}
@@ -59,12 +62,14 @@ export default function Navbar() {
         
         <Link
           href="/"
-          className="text-xl font-bold cursor-pointer relative group z-50"
+          className="text-xl font-bold cursor-pointer relative group z-50 flex items-center gap-2"
         >
-          Carlos<span className="text-green-400"> / Dev</span>
+          <span className="text-[var(--foreground)]">Carlos</span>
+          <span className="text-[var(--muted-foreground)]">/ Dev</span>
         </Link>
 
-        <div className="hidden md:flex space-x-1">
+        {/* Desktop Navigation */}
+        <div className="hidden md:flex items-center space-x-1">
           {navLinks.map((link) => {
             const isActive = pathname === link.href;
 
@@ -72,20 +77,20 @@ export default function Navbar() {
               <Link
                 key={link.name}
                 href={link.href}
-                className="relative px-4 py-2 rounded-full text-sm font-medium transition-colors"
+                className="relative px-4 py-2 rounded-md text-sm font-medium transition-colors"
               >
                 {isActive && (
                   <motion.span
                     layoutId="nav-pill"
-                    className="absolute inset-0 bg-white/10 rounded-full"
+                    className="absolute inset-0 bg-[var(--muted)] rounded-md"
                     transition={{ type: "spring", stiffness: 300, damping: 30 }}
                   />
                 )}
                 <span
                   className={`relative z-10 transition-colors ${
                     isActive
-                      ? "text-green-400 font-bold"
-                      : "text-gray-300 hover:text-white"
+                      ? "text-[var(--foreground)] font-semibold"
+                      : "text-[var(--muted-foreground)] hover:text-[var(--foreground)]"
                   }`}
                 >
                   {link.name}
@@ -93,83 +98,80 @@ export default function Navbar() {
               </Link>
             );
           })}
+
+          {/* Theme Toggle Button */}
+          {mounted && (
+            <button
+              onClick={toggleTheme}
+              className="ml-4 p-2 rounded-full hover:bg-[var(--muted)] transition-colors text-[var(--muted-foreground)] hover:text-[var(--foreground)]"
+              aria-label="Toggle Theme"
+            >
+              {resolvedTheme === "dark" ? (
+                <Sun className="w-5 h-5" />
+              ) : (
+                <Moon className="w-5 h-5" />
+              )}
+            </button>
+          )}
         </div>
 
-        <button
-          onClick={() => setIsOpen(true)}
-          className="md:hidden text-2xl text-white focus:outline-none hover:text-green-400 transition z-50"
-          aria-label="Open Menu"
-        >
-          <FaBars />
-        </button>
+        {/* Mobile Toggle & Theme */}
+        <div className="md:hidden flex items-center gap-3 z-50">
+          {mounted && (
+            <button
+              onClick={toggleTheme}
+              className="p-2 rounded-full hover:bg-[var(--muted)] transition-colors text-[var(--muted-foreground)]"
+              aria-label="Toggle Theme"
+            >
+              {resolvedTheme === "dark" ? (
+                <Sun className="w-5 h-5" />
+              ) : (
+                <Moon className="w-5 h-5" />
+              )}
+            </button>
+          )}
+          
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            className="text-[var(--foreground)] p-2 focus:outline-none transition-colors"
+            aria-label="Toggle Menu"
+          >
+            {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          </button>
+        </div>
       </div>
 
+      {/* Mobile Navigation Dropdown */}
       <AnimatePresence>
         {isOpen && (
-          <>
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.3 }}
-              onClick={() => setIsOpen(false)}
-              className="fixed inset-0 bg-black/80 z-40 md:hidden"
-            />
-            
-            <motion.div
-              initial={{ x: "100%" }}
-              animate={{ x: 0 }}
-              exit={{ x: "100%" }}
-              transition={{ type: "tween", ease: "easeInOut", duration: 0.3 }}
-              className="fixed top-0 right-0 h-screen w-[75%] max-w-sm bg-zinc-900 border-l border-white/10 shadow-2xl z-50 md:hidden flex flex-col p-6 overflow-hidden will-change-transform"
-            >
-              <div className="absolute inset-0 bg-linear-to-b from-zinc-900 to-black pointer-events-none -z-10" />
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.2, ease: "easeOut" }}
+            className="absolute top-full left-0 w-full bg-[var(--background)] border-b border-[var(--border)] shadow-lg md:hidden"
+          >
+            <div className="flex flex-col px-5 py-4 space-y-1">
+              {navLinks.map((link) => {
+                const isActive = pathname === link.href;
 
-              <div className="relative z-10 flex justify-between items-center mb-10">
-                <span className="text-lg font-bold text-white">
-                  Carlos<span className="text-green-400">Dev</span>
-                </span>
-                <button
-                  onClick={() => setIsOpen(false)}
-                  className="text-2xl hover:text-red-400 transition"
-                  aria-label="Close Menu"
-                >
-                  <FaTimes />
-                </button>
-              </div>
-
-              <div className="relative z-10 flex flex-col space-y-4">
-                {navLinks.map((link, index) => {
-                  const isActive = pathname === link.href;
-
-                  return (
-                    <motion.div
-                      key={link.name}
-                      initial={{ opacity: 0, x: 20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: 0.1 * index, duration: 0.3 }}
-                    >
-                      <Link
-                        href={link.href}
-                        onClick={() => setIsOpen(false)}
-                        className={`text-xl font-medium block py-3 border-b border-white/5 transition-all ${
-                          isActive
-                            ? "text-green-400 pl-4 border-green-500/30 bg-green-500/5 rounded-r-lg"
-                            : "text-gray-300 hover:text-white hover:pl-2"
-                        }`}
-                      >
-                        {link.name}
-                      </Link>
-                    </motion.div>
-                  );
-                })}
-              </div>
-
-              <div className="mt-auto relative z-10 text-center text-xs text-gray-500">
-                <p>© {new Date().getFullYear()} Carlos Miguel Sandrino.</p>
-              </div>
-            </motion.div>
-          </>
+                return (
+                  <Link
+                    key={link.name}
+                    href={link.href}
+                    onClick={() => setIsOpen(false)}
+                    className={`block px-4 py-3 rounded-lg text-base font-medium transition-colors ${
+                      isActive
+                        ? "bg-[var(--muted)] text-[var(--foreground)]"
+                        : "text-[var(--muted-foreground)] hover:bg-[var(--muted)]/50 hover:text-[var(--foreground)]"
+                    }`}
+                  >
+                    {link.name}
+                  </Link>
+                );
+              })}
+            </div>
+          </motion.div>
         )}
       </AnimatePresence>
     </motion.nav>

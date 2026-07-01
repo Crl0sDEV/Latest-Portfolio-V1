@@ -1,8 +1,9 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import { Send, Bot, X, Sparkles } from "lucide-react";
+import ReactMarkdown from "react-markdown";
 import { motion, AnimatePresence } from "framer-motion";
-import { FaPaperPlane, FaRobot, FaTimes } from "react-icons/fa";
 
 export default function AIWidget() {
   const [isOpen, setIsOpen] = useState(false);
@@ -65,9 +66,11 @@ export default function AIWidget() {
     });
   };
 
-  const sendMessage = async () => {
-    if (!input.trim()) return;
-    const userMessage = { role: "user", content: input };
+  const sendMessage = async (overrideText = null) => {
+    const textToSend = typeof overrideText === 'string' ? overrideText : input;
+    if (!textToSend.trim()) return;
+    
+    const userMessage = { role: "user", content: textToSend };
     const newHistory = [...messages, userMessage];
 
     setMessages(newHistory);
@@ -121,13 +124,13 @@ export default function AIWidget() {
       <motion.button
         onClick={handleOpen}
         whileTap={{ scale: 0.9 }}
-        className="fixed bottom-6 right-6 md:bottom-8 md:right-8 bg-green-500 text-black w-14 h-14 rounded-full shadow-lg flex items-center justify-center z-50 group"
+        className="fixed bottom-6 right-6 md:bottom-8 md:right-8 bg-[var(--foreground)] text-[var(--background)] w-14 h-14 rounded-full shadow-lg flex items-center justify-center z-50 group hover:opacity-90 transition-opacity"
       >
-        <div className="absolute inset-0 bg-green-400 rounded-full animate-ping opacity-20 pointer-events-none" />
+        <div className="absolute inset-0 bg-[var(--foreground)] rounded-full animate-ping opacity-20 pointer-events-none" />
         {isOpen ? (
-          <FaTimes className="text-xl" />
+          <X className="w-6 h-6" />
         ) : (
-          <FaRobot className="text-2xl" />
+          <Bot className="w-6 h-6" />
         )}
       </motion.button>
 
@@ -137,11 +140,11 @@ export default function AIWidget() {
             initial={{ opacity: 0, y: 10, scale: 0.9 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 10, scale: 0.9 }}
-            className="fixed bottom-24 right-6 md:right-24 bg-zinc-800 border border-green-500/30 text-white px-4 py-3 rounded-2xl rounded-tr-none shadow-xl z-50 max-w-[200px]"
+            className="fixed bottom-24 right-6 md:right-24 bg-[var(--muted)]/80 border border-[var(--border)] text-[var(--foreground)] px-4 py-3 rounded-2xl rounded-tr-none shadow-md z-50 max-w-[200px] backdrop-blur-md"
           >
             <p className="text-sm font-medium">
               👋 {greetingText} <br />{" "}
-              <span className="text-gray-400 text-xs">
+              <span className="text-[var(--muted-foreground)] text-xs font-light">
                 Need help? Chat with AI!
               </span>
             </p>
@@ -156,32 +159,32 @@ export default function AIWidget() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
             transition={{ duration: 0.2, ease: "easeOut" }}
-            className="fixed bottom-24 right-6 md:right-8 w-[90vw] max-w-[360px] h-[500px] bg-zinc-900 border border-white/10 rounded-2xl shadow-2xl flex flex-col overflow-hidden z-50"
+            className="fixed bottom-24 right-6 md:right-8 w-[90vw] max-w-[360px] h-[500px] bg-[var(--background)]/90 backdrop-blur-xl border border-[var(--border)] rounded-2xl shadow-xl flex flex-col overflow-hidden z-50"
           >
     
-            <div className="bg-linear-to-r from-green-600 to-emerald-600 p-4 flex items-center gap-3 shadow-md">
-              <div className="bg-white/20 p-2 rounded-full">
-                <FaRobot className="text-white text-lg" />
+            <div className="bg-[var(--muted)]/50 p-4 flex items-center gap-3 border-b border-[var(--border)]">
+              <div className="bg-[var(--background)] p-2 rounded-full shadow-sm">
+                <Bot className="text-[var(--foreground)] w-5 h-5" />
               </div>
               <div>
-                <h2 className="text-white font-bold text-sm">
+                <h2 className="text-[var(--foreground)] font-bold text-sm">
                   Carlos' AI Assistant
                 </h2>
-                <p className="text-green-100 text-xs flex items-center gap-1">
-                  <span className="w-2 h-2 bg-green-300 rounded-full animate-pulse" />{" "}
+                <p className="text-[var(--muted-foreground)] text-xs flex items-center gap-1.5 font-light">
+                  <span className="w-2 h-2 bg-green-500/80 rounded-full animate-pulse" />{" "}
                   Online
                 </p>
               </div>
               <button
                 onClick={() => setIsOpen(false)}
-                className="ml-auto text-white/80 hover:text-white transition"
+                className="ml-auto text-[var(--muted-foreground)] hover:text-[var(--foreground)] transition-colors"
               >
-                <FaTimes />
+                <X className="w-5 h-5" />
               </button>
             </div>
 
-            <div className="flex-1 overflow-y-auto p-4 space-y-4 scrollbar-thin scrollbar-thumb-zinc-700 scrollbar-track-transparent overscroll-contain">
-              <div className="text-center text-[10px] text-gray-500 my-2 uppercase tracking-wide">
+            <div className="flex-1 overflow-y-auto p-4 space-y-4 scrollbar-thin scrollbar-thumb-[var(--border)] scrollbar-track-transparent overscroll-contain">
+              <div className="text-center text-[10px] text-[var(--muted-foreground)] my-2 uppercase tracking-wide">
                 Today
               </div>
 
@@ -195,31 +198,34 @@ export default function AIWidget() {
                   <div
                     className={`max-w-[85%] p-3 rounded-2xl text-sm leading-relaxed shadow-sm ${
                       msg.role === "user"
-                        ? "bg-green-600 text-white rounded-tr-none"
-                        : "bg-zinc-800 text-gray-200 border border-white/5 rounded-tl-none"
+                        ? "bg-[var(--foreground)] text-[var(--background)] rounded-tr-none"
+                        : "bg-[var(--muted)]/40 text-[var(--foreground)] border border-[var(--border)] rounded-tl-none font-light prose prose-invert prose-sm max-w-none"
                     }`}
                   >
-                    {msg.content}
+                    {msg.role === "assistant" ? (
+                      <ReactMarkdown>{msg.content}</ReactMarkdown>
+                    ) : (
+                      msg.content
+                    )}
                   </div>
                 </div>
               ))}
 
               {currentTyping && (
                 <div className="flex justify-start">
-                  <div className="max-w-[85%] p-3 rounded-2xl text-sm leading-relaxed bg-zinc-800 text-gray-200 border border-white/5 rounded-tl-none">
+                  <div className="max-w-[85%] p-3 rounded-2xl text-sm leading-relaxed bg-[var(--muted)]/40 text-[var(--foreground)] border border-[var(--border)] rounded-tl-none font-light">
                     {currentTyping}
-                    <span className="animate-pulse ml-1 inline-block w-1.5 h-4 bg-green-500 align-middle"></span>
+                    <span className="animate-pulse ml-1 inline-block w-1.5 h-4 bg-[var(--foreground)] align-middle"></span>
                   </div>
                 </div>
               )}
 
               {isTyping && !currentTyping && (
                 <div className="flex justify-start">
-                  <div className="bg-zinc-800 border border-white/5 px-4 py-3 rounded-2xl rounded-tl-none flex gap-1 items-center">
-                 
-                    <div className="w-2 h-2 bg-gray-500 rounded-full animate-bounce [animation-delay:-0.3s]" />
-                    <div className="w-2 h-2 bg-gray-500 rounded-full animate-bounce [animation-delay:-0.15s]" />
-                    <div className="w-2 h-2 bg-gray-500 rounded-full animate-bounce" />
+                  <div className="bg-[var(--muted)]/40 border border-[var(--border)] px-4 py-3 rounded-2xl rounded-tl-none flex gap-1.5 items-center">
+                    <div className="w-1.5 h-1.5 bg-[var(--muted-foreground)] rounded-full animate-bounce [animation-delay:-0.3s]" />
+                    <div className="w-1.5 h-1.5 bg-[var(--muted-foreground)] rounded-full animate-bounce [animation-delay:-0.15s]" />
+                    <div className="w-1.5 h-1.5 bg-[var(--muted-foreground)] rounded-full animate-bounce" />
                   </div>
                 </div>
               )}
@@ -227,34 +233,50 @@ export default function AIWidget() {
               <div ref={messagesEndRef} />
             </div>
 
-            <div className="p-3 bg-zinc-900 border-t border-white/10">
+            <div className="p-3 bg-[var(--background)]/80 backdrop-blur-md border-t border-[var(--border)]">
+              
+              {messages.length < 4 && !isTyping && (
+                <div className="flex gap-2 overflow-x-auto pb-3 mb-1 no-scrollbar">
+                  {["Who is Carlos?", "What are his tech skills?", "How can I contact him?"].map((suggestion, i) => (
+                    <button
+                      key={i}
+                      onClick={() => sendMessage(suggestion)}
+                      className="whitespace-nowrap flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-full border border-[var(--border)] bg-[var(--muted)]/30 hover:bg-[var(--muted)] text-[var(--muted-foreground)] hover:text-[var(--foreground)] transition-colors"
+                    >
+                      <Sparkles className="w-3 h-3" />
+                      {suggestion}
+                    </button>
+                  ))}
+                </div>
+              )}
+
               <form
                 onSubmit={(e) => {
                   e.preventDefault();
                   sendMessage();
                 }}
-                className="flex gap-2 items-center bg-zinc-800 border border-white/10 rounded-full px-4 py-2 focus-within:border-green-500/50 transition-all"
+                className="flex gap-2 items-center bg-[var(--muted)]/30 border border-[var(--border)] rounded-full px-4 py-2 focus-within:border-[var(--muted-foreground)] transition-all"
               >
                 <input
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
                   placeholder="Type a message..."
-                  className="flex-1 bg-transparent text-white text-sm focus:outline-none placeholder-gray-500"
+                  className="flex-1 bg-transparent text-[var(--foreground)] text-sm focus:outline-none placeholder:text-[var(--muted-foreground)] font-light"
                 />
                 <button
                   type="submit"
                   disabled={!input.trim() || isTyping}
                   className={`p-2 rounded-full transition-all ${
                     input.trim()
-                      ? "bg-green-500 text-black hover:bg-green-400"
-                      : "bg-zinc-700 text-gray-500 cursor-not-allowed"
+                      ? "bg-[var(--foreground)] text-[var(--background)] hover:opacity-90"
+                      : "bg-[var(--muted)] text-[var(--muted-foreground)] cursor-not-allowed"
                   }`}
                 >
-                  <FaPaperPlane className="text-xs" />
+                  <Send className="w-4 h-4 -ml-0.5" />
                 </button>
               </form>
               <div className="text-center mt-2">
-                <p className="text-[10px] text-gray-600">
+                <p className="text-[10px] text-[var(--muted-foreground)]">
                   Powered by Gemini AI
                 </p>
               </div>

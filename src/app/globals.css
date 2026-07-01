@@ -1,37 +1,51 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@custom-variant dark (&:is(.dark *));
 
-@theme inline {
+@theme {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-border: var(--border);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+:root {
+  /* Relaxed Light Theme */
+  --background: #f4f5f7;
+  --foreground: #333333;
+  --muted: #e2e4e9;
+  --muted-foreground: #6b7280;
+  --accent: #d1d5db;
+  --accent-foreground: #1f2937;
+  --border: #d1d5db;
+}
+
+.dark {
+  /* Relaxed Dark Theme */
+  --background: #18191a;
+  --foreground: #e4e4e7;
+  --muted: #27272a;
+  --muted-foreground: #a1a1aa;
+  --accent: #3f3f46;
+  --accent-foreground: #f4f4f5;
+  --border: #3f3f46;
 }
 
 body {
-  background: var(--background);
+  background-color: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 html {
-  data-scroll-behavior: smooth;
+  scroll-behavior: smooth;
 }
 
 html, body {
   overflow-x: hidden;
-  background-color: #0a0a0a !important;
 }
 
 @layer utilities {

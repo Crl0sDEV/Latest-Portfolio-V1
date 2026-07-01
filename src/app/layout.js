@@ -2,7 +2,10 @@ import "./globals.css";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import AIWidget from "../components/AIWidget";
-import SnowEffect from "../components/SnowEffect";
+import { ThemeProvider } from "../components/ThemeProvider";
+import { Inter } from "next/font/google";
+
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
 export const metadata = {
   title: "Carlos Miguel Sandrino | Web Developer Portfolio",
@@ -68,26 +71,26 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en" data-scroll-behavior="smooth" suppressHydrationWarning >
       <head>
-        
         <meta
           name="google-site-verification"
           content="XrhjcO-Xcvf0l4TVmWp7WdXGEOQ_Cs3v_BW7z3OYV6I"
         />
-        <meta name="theme-color" content="#000000" />
+        <meta name="theme-color" content="#f4f5f7" media="(prefers-color-scheme: light)" />
+        <meta name="theme-color" content="#18191a" media="(prefers-color-scheme: dark)" />
 
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-
       </head>
 
-      <body className="bg-black text-white font-montserrat">
-        <Navbar />
-        <main className="pt-16">{children}</main>
-        <Footer />
-        <SnowEffect />
-        <AIWidget />
+      <body className={`${inter.variable} font-sans antialiased bg-[var(--background)] text-[var(--foreground)] min-h-screen transition-colors duration-300`}>
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          <Navbar />
+          <main className="pt-20">{children}</main>
+          <Footer />
+          <AIWidget />
+        </ThemeProvider>
       </body>
     </html>
   );

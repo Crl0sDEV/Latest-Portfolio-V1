@@ -1,36 +1,32 @@
 "use client";
 
 import Reveal from "./Reveal";
-import { FaGithub, FaFacebook, FaLinkedin, FaInstagram, FaTelegram } from "react-icons/fa";
+import { FaGithub, FaFacebook, FaLinkedin, FaInstagram } from "react-icons/fa";
 import { motion, useMotionTemplate, useMotionValue } from "framer-motion";
 
 const socialLinks = [
   {
     name: "LinkedIn",
-    icon: <FaLinkedin />,
+    icon: <FaLinkedin className="w-8 h-8" />,
     url: "https://www.linkedin.com/in/sandrino-carlos-miguel",
-    color: "text-blue-500",
     username: "Carlos Miguel Sandrino",
   },
   {
     name: "GitHub",
-    icon: <FaGithub />,
+    icon: <FaGithub className="w-8 h-8" />,
     url: "https://github.com/Crl0sDEV",
-    color: "text-white",
     username: "Crl0sDEV",
   },
   {
     name: "Facebook",
-    icon: <FaFacebook />,
+    icon: <FaFacebook className="w-8 h-8" />,
     url: "https://www.facebook.com/KreizzyCarl",
-    color: "text-blue-600",
     username: "Carlos Miguel",
   },
   {
     name: "Instagram",
-    icon: <FaInstagram />,
+    icon: <FaInstagram className="w-8 h-8" />,
     url: "https://www.instagram.com/crls_mgx",
-    color: "text-pink-500",
     username: "@crls_mgx",
   },
 ];
@@ -51,7 +47,7 @@ function SocialCard({ social }) {
       target="_blank"
       rel="noopener noreferrer"
       onMouseMove={handleMouseMove}
-      className="group relative bg-zinc-900 border border-white/10 p-6 rounded-2xl flex flex-col items-center transition-all overflow-hidden h-full justify-center"
+      className="group relative bg-[var(--background)] border border-[var(--border)] p-6 rounded-2xl flex flex-col items-center transition-all overflow-hidden h-full justify-center shadow-sm hover:shadow-md"
     >
       <motion.div
         className="pointer-events-none absolute -inset-px rounded-2xl opacity-0 transition duration-300 group-hover:opacity-100"
@@ -59,7 +55,7 @@ function SocialCard({ social }) {
           background: useMotionTemplate`
             radial-gradient(
               400px circle at ${mouseX}px ${mouseY}px,
-              rgba(255, 255, 255, 0.1),
+              var(--muted),
               transparent 80%
             )
           `,
@@ -67,11 +63,11 @@ function SocialCard({ social }) {
       />
       
       <div className="relative z-10 flex flex-col items-center">
-          <div className={`text-4xl mb-3 transition-transform duration-300 group-hover:scale-110 group-hover:-translate-y-1 ${social.color}`}>
+          <div className="text-[var(--muted-foreground)] mb-3 transition-transform duration-300 group-hover:scale-110 group-hover:-translate-y-1 group-hover:text-[var(--foreground)]">
             {social.icon}
           </div>
-          <h4 className="font-bold text-gray-200 group-hover:text-white transition-colors">{social.name}</h4>
-          <span className="text-xs text-gray-500 mt-1 group-hover:text-green-400 transition-colors">{social.username}</span>
+          <h4 className="font-bold text-[var(--foreground)] transition-colors">{social.name}</h4>
+          <span className="text-xs text-[var(--muted-foreground)] mt-1 group-hover:text-[var(--foreground)] transition-colors font-light">{social.username}</span>
       </div>
     </a>
   );

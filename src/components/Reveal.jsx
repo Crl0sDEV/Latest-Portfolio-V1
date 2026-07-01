@@ -4,7 +4,7 @@ import { motion, useAnimation } from "framer-motion";
 import { useEffect } from "react";
 import { useInView } from "react-intersection-observer";
 
-export default function Reveal({ children, delay = 0 }) {
+export default function Reveal({ children, delay = 0, className = "" }) {
   const controls = useAnimation();
   const [ref, inView] = useInView({
     threshold: 0.2,
@@ -26,6 +26,7 @@ export default function Reveal({ children, delay = 0 }) {
       initial="hidden"
       animate={controls}
       transition={{ duration: 0.7, delay }}
+      className={className}
     >
       {children}
     </motion.div>

@@ -28,7 +28,7 @@ export default function BlogList({ initialPosts }) {
 
   return (
     <>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pb-12 items-start">
+      <div className="flex flex-col gap-10 pb-16 items-center w-full max-w-4xl mx-auto">
         {posts.map((post, index) => (
           <BlogCard key={post.id} post={post} index={index} />
         ))}
@@ -40,24 +40,24 @@ export default function BlogList({ initialPosts }) {
             <button
               onClick={loadMore}
               disabled={loading}
-              className="group relative px-8 py-3 rounded-full bg-zinc-900 border border-white/10 hover:border-green-500/50 hover:bg-zinc-800 transition-all active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="group relative px-8 py-3 rounded-full bg-[var(--muted)]/50 border border-[var(--border)] hover:border-[var(--muted-foreground)]/50 hover:bg-[var(--muted)] transition-all active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed shadow-sm"
             >
               <span
-                className={`text-sm font-bold text-gray-300 group-hover:text-green-400 flex items-center gap-2 ${
+                className={`text-sm font-medium text-[var(--muted-foreground)] group-hover:text-[var(--foreground)] flex items-center gap-2 ${
                   loading ? "animate-pulse" : ""
                 }`}
               >
                 {loading ? "Loading Posts..." : "Load More Articles"}
               </span>
 
-              <div className="absolute inset-0 rounded-full bg-green-500/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity" />
+              <div className="absolute inset-0 rounded-full bg-[var(--muted)]/50 blur-xl opacity-0 group-hover:opacity-10 transition-opacity" />
             </button>
           </div>
         </Reveal>
       )}
 
       {!hasMore && posts.length > 0 && (
-        <div className="text-center pb-20 text-gray-600 text-sm">
+        <div className="text-center pb-20 text-[var(--muted-foreground)] text-sm font-light">
           You've reached the end of the archives.
         </div>
       )}

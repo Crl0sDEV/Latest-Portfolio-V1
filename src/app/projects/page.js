@@ -1,6 +1,7 @@
 import Reveal from "../../components/Reveal";
 import ProjectCard from "../../components/ProjectCard";
-import { FaTools, FaGithub } from "react-icons/fa";
+import { Wrench } from "lucide-react";
+import { FaGithub } from "react-icons/fa";
 
 export const metadata = {
   title: "My Projects | Carlos Miguel Sandrino",
@@ -20,7 +21,7 @@ export default function Projects() {
       title: "Rolyo Laundry Services | Cabanatuan City",
       description: "Premier laundry services in Cabanatuan. Wash, Dry, Fold, and Delivery.",
       link: "https://rolyo.vercel.app/",
-      tech: ["Next.js", "Tailwind CSS", "Framer Motion", "Lucid React"],
+      tech: ["Next.js", "Tailwind CSS", "Framer Motion", "Lucide React"],
       img: "/projects/rolyo.png",
     },
     {
@@ -97,7 +98,7 @@ export default function Projects() {
       title: "Water Level Monitoring – Mobile",
       description:
         "Android app built with Flutter and Supabase for live river water-level monitoring.",
-      link: "#",
+      link: null,
       tech: ["Flutter", "Supabase", "Android", "Arduino", "GSM Module", "Ultrasonic Sensor"],
       img: null,
     },
@@ -113,7 +114,7 @@ export default function Projects() {
       title: "UNITRACK – Tracking App",
       description:
         "Flutter + Firebase application for real-time location tracking inside school campuses.",
-      link: "#",
+      link: null,
       tech: ["Flutter", "Firebase", "Google Maps API"],
       img: null,
     },
@@ -125,48 +126,34 @@ export default function Projects() {
       tech: ["Next.js", "Tailwind", "Framer Motion", "Gemini API", "Upstash Redis", "Supabase"],
       img: "/projects/portfolio.png",
     },
-    
   ];
 
   return (
-    <section className="relative min-h-screen bg-black text-white py-24 lg:py-8 px-6 overflow-hidden">
+    <section className="relative min-h-screen bg-[var(--background)] text-[var(--foreground)] py-24 lg:py-16 px-6 overflow-hidden">
       
-      <div className="absolute top-0 left-0 w-96 h-96 bg-green-500/10 rounded-full blur-[128px] pointer-events-none" />
-      <div className="absolute bottom-0 right-0 w-96 h-96 bg-blue-500/10 rounded-full blur-[128px] pointer-events-none" />
+      {/* Soft, neutral glowing background blobs */}
+      <div className="absolute top-0 left-0 w-96 h-96 bg-[var(--muted)] rounded-full blur-[120px] pointer-events-none opacity-50" />
+      <div className="absolute bottom-0 right-0 w-96 h-96 bg-[var(--accent)] rounded-full blur-[120px] pointer-events-none opacity-30" />
 
-      <div className="max-w-6xl mx-auto relative z-10">
+      <div className="max-w-6xl mx-auto relative">
         
         <div className="mb-16 text-center">
               <Reveal>
-                <h1 className="text-4xl md:text-5xl font-bold mb-6 tracking-tight">
-                    Featured <span className="text-transparent bg-clip-text bg-linear-to-r from-green-400 to-emerald-600">Projects</span>
+                <h1 className="text-3xl md:text-4xl font-extrabold mb-6 tracking-tight">
+                    Featured <span className="text-transparent bg-clip-text bg-gradient-to-r from-[var(--foreground)] to-[var(--muted-foreground)]">Projects</span>
                 </h1>
               </Reveal>
               
               <Reveal delay={0.2}>
-                <p className="text-gray-400 max-w-2xl mx-auto text-lg">
+                <p className="text-[var(--muted-foreground)] max-w-2xl mx-auto text-lg font-light">
                     A showcase of my technical journey—from IoT systems to modern web applications.
                 </p>
               </Reveal>
         </div>
 
-        <Reveal delay={0.3}>
-            <div className="flex justify-center mb-16">
-                <div className="px-5 py-2 rounded-full bg-yellow-500/10 border border-yellow-500/20 flex items-center gap-3 backdrop-blur-md">
-                    <div className="p-1.5 bg-yellow-500/20 rounded-full animate-pulse">
-                        <FaTools className="text-yellow-500 text-sm" />
-                    </div>
-                    <span className="text-yellow-500/90 text-sm font-medium">
-                        Work in Progress — Adding more projects soon!
-                    </span>
-                </div>
-            </div>
-        </Reveal>
-
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
           {projects.map((project, i) => (
-             
-             <Reveal key={i} delay={0.1 * i}> 
+             <Reveal key={i} delay={0.1 * (i % 3)}> 
                 <ProjectCard project={project} priority={i === 0} />
              </Reveal>
           ))}
@@ -177,10 +164,11 @@ export default function Projects() {
             <a
               href="https://github.com/Crl0sDEV"
               target="_blank"
-              className="group inline-flex items-center gap-3 px-8 py-4 rounded-full bg-zinc-900 border border-white/10 hover:border-green-500/50 hover:bg-zinc-800 transition-all duration-300"
+              rel="noopener noreferrer"
+              className="group inline-flex items-center gap-3 px-8 py-4 rounded-full bg-[var(--muted)]/50 border border-[var(--border)] hover:bg-[var(--muted)] hover:border-[var(--muted-foreground)]/50 transition-all duration-300 shadow-sm"
             >
-              <FaGithub className="text-2xl text-white group-hover:text-green-400 transition-colors" />
-              <span className="font-bold text-gray-300 group-hover:text-white transition-colors">
+              <FaGithub className="w-6 h-6 text-[var(--foreground)] group-hover:scale-110 transition-transform" />
+              <span className="font-medium text-[var(--muted-foreground)] group-hover:text-[var(--foreground)] transition-colors">
                   Check out more on GitHub
               </span>
             </a>
