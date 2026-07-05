@@ -4,11 +4,11 @@ import Reveal from "../components/Reveal";
 import VisitorCounter from "@/components/VisitorCounter";
 import LikeButton from "@/components/LikeButton";
 import { motion, useMotionTemplate, useMotionValue } from "framer-motion";
-import { Download, Mail, ChevronRight } from "lucide-react";
+import { Download, Mail, ChevronRight, BadgeCheck } from "lucide-react";
 import Link from "next/link";
-import Typewriter from "typewriter-effect";
 import Image from "next/image";
 import AutomationDemo from "../components/AutomationDemo";
+import Testimonials from "../components/Testimonials";
 
 function SpotlightCard({ children, className = "" }) {
   const mouseX = useMotionValue(0);
@@ -62,10 +62,12 @@ export default function Home() {
             </Reveal>
 
             <Reveal>
-              <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight mb-4 leading-tight">
-                Hi, I&apos;m <br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[var(--foreground)] to-[var(--muted-foreground)]">
-                  Carlos Miguel
+              <h1 className="text-3xl md:text-5xl font-bold tracking-tight mb-4 leading-tight">
+                <span className="inline-flex items-center gap-3">
+                  <span className="text-[var(--foreground)]">
+                    Carlos Miguel Sandrino
+                  </span>
+                  <BadgeCheck className="w-8 h-8 md:w-10 md:h-10 text-blue-500 fill-blue-500/20" />
                 </span>
               </h1>
             </Reveal>
@@ -73,28 +75,13 @@ export default function Home() {
             <Reveal delay={0.2}>
               <div className="text-xl md:text-2xl font-medium text-[var(--muted-foreground)] h-10 flex items-center justify-center lg:justify-start gap-2 mb-6">
                 <ChevronRight className="w-6 h-6 opacity-50" />
-                <Typewriter
-                  options={{
-                    strings: [
-                      "Web Developer",
-                      "Frontend Engineer",
-                      "Next.js Specialist",
-                      "UI/UX Enthusiast",
-                    ],
-                    autoStart: true,
-                    loop: true,
-                    delay: 50,
-                    deleteSpeed: 30,
-                  }}
-                />
+                Full Stack Web Developer
               </div>
             </Reveal>
 
             <Reveal delay={0.3}>
               <p className="text-[var(--muted-foreground)] text-lg leading-relaxed font-light max-w-lg mb-10">
-                I craft elegant, modern, and performant web experiences with a focus on clean code and relaxing aesthetics using{" "}
-                <span className="text-[var(--foreground)] font-medium">Next.js</span> and{" "}
-                <span className="text-[var(--foreground)] font-medium">Tailwind CSS</span>.
+                I engineer scalable web systems and applications designed to solve real-world problems. My focus is on turning complex challenges into efficient digital solutions that help businesses streamline operations and drive measurable growth.
               </p>
             </Reveal>
 
@@ -144,9 +131,9 @@ export default function Home() {
               <Image
                 src="/profile.png"
                 alt="Carlos Miguel Sandrino"
-                fill
-                className="object-cover grayscale-[20%] hover:grayscale-0 transition-all duration-700"
-                sizes="(max-width: 768px) 100vw, 50vw"
+                width={480}
+                height={480}
+                className="object-cover w-full h-full grayscale-[20%] hover:grayscale-0 transition-all duration-700"
                 priority
               />
             </div>
@@ -154,6 +141,7 @@ export default function Home() {
         </div>
       </main>
       
+      <Testimonials />
       <AutomationDemo />
     </div>
   );

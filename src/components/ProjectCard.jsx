@@ -3,10 +3,10 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence, useMotionTemplate, useMotionValue } from "framer-motion";
 import Image from "next/image";
-import { ExternalLink, Code, X, Monitor, Smartphone, Tablet } from "lucide-react";
+import { ExternalLink, Code, X, Monitor, Smartphone, Tablet, AlertCircle, CheckCircle2 } from "lucide-react";
 import { FaGithub } from "react-icons/fa";
 
-export default function ProjectCard({ project, priority = false }) {
+export default function ProjectCard({ project, index = 0, priority = false }) {
   const [showModal, setShowModal] = useState(false);
   const [viewMode, setViewMode] = useState("desktop"); // desktop, tablet, mobile
   const mouseX = useMotionValue(0);
@@ -29,7 +29,7 @@ export default function ProjectCard({ project, priority = false }) {
   return (
     <>
       <motion.div
-        className="group relative rounded-2xl bg-[var(--background)] border border-[var(--border)] overflow-hidden transition-all duration-300 hover:shadow-lg"
+        className="group relative rounded-2xl bg-[var(--background)] border border-[var(--border)] overflow-hidden transition-all duration-300 hover:shadow-lg w-full max-w-5xl mx-auto"
         onMouseMove={handleMouseMove}
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -49,9 +49,9 @@ export default function ProjectCard({ project, priority = false }) {
           }}
         />
 
-        <div className="relative h-full flex flex-col z-20">
+        <div className={`relative h-full flex flex-col ${index % 2 !== 0 ? 'lg:flex-row-reverse' : 'lg:flex-row'} z-20`}>
           
-          <div className="relative h-56 w-full overflow-hidden border-b border-[var(--border)] bg-[var(--muted)]/30 group-hover:border-[var(--muted-foreground)]/30 transition-colors duration-500">
+          <div className="relative h-64 lg:h-auto lg:w-5/12 overflow-hidden border-b lg:border-b-0 lg:border-r border-[var(--border)] bg-[var(--muted)]/30 group-hover:border-[var(--muted-foreground)]/30 transition-colors duration-500">
             {project.img ? (
               <Image
                 src={project.img}
@@ -81,10 +81,10 @@ export default function ProjectCard({ project, priority = false }) {
             )}
           </div>
 
-          <div className="p-6 flex flex-col grow bg-[var(--background)]/80 backdrop-blur-sm">
+          <div className="p-6 lg:p-8 flex flex-col grow lg:w-7/12 bg-[var(--background)]/80 backdrop-blur-sm justify-center">
             
             <div className="flex justify-between items-start mb-4">
-               <h2 className="text-xl font-bold text-[var(--foreground)] group-hover:text-[var(--foreground)] transition-colors duration-300 leading-tight">
+               <h2 className="text-2xl font-bold text-[var(--foreground)] group-hover:text-[var(--foreground)] transition-colors duration-300 leading-tight">
                  {project.title}
                </h2>
               
@@ -102,9 +102,33 @@ export default function ProjectCard({ project, priority = false }) {
                </div>
             </div>
 
-            <p className="text-[var(--muted-foreground)] text-sm mb-6 line-clamp-3 leading-relaxed font-light">
+            <p className={`text-[var(--muted-foreground)] text-sm md:text-base leading-relaxed font-light ${project.isCaseStudy ? 'mb-6' : 'mb-6 lg:line-clamp-3'}`}>
               {project.description}
             </p>
+
+            {project.isCaseStudy && project.problem && (
+              <div className="mb-4 flex gap-3">
+                <div className="mt-0.5">
+                  <AlertCircle className="w-5 h-5 text-orange-500/80" />
+                </div>
+                <div>
+                  <h4 className="text-sm font-bold text-[var(--foreground)] mb-1">The Challenge</h4>
+                  <p className="text-xs md:text-sm text-[var(--muted-foreground)] font-light leading-relaxed">{project.problem}</p>
+                </div>
+              </div>
+            )}
+            
+            {project.isCaseStudy && project.solution && (
+              <div className="mb-6 flex gap-3">
+                <div className="mt-0.5">
+                  <CheckCircle2 className="w-5 h-5 text-green-500/80" />
+                </div>
+                <div>
+                  <h4 className="text-sm font-bold text-[var(--foreground)] mb-1">The Solution</h4>
+                  <p className="text-xs md:text-sm text-[var(--muted-foreground)] font-light leading-relaxed">{project.solution}</p>
+                </div>
+              </div>
+            )}
 
             {/* TECH STACK PILLS */}
             <div className="mt-auto pt-4 border-t border-[var(--border)] flex flex-wrap gap-2">

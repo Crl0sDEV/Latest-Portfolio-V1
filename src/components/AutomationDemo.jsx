@@ -6,7 +6,7 @@ export default function AutomationDemo() {
   return (
     <section className="relative w-full bg-[var(--background)] text-[var(--foreground)] py-32 px-6 flex flex-col items-center border-t border-[var(--border)] z-20 transition-colors duration-300">
       <div className="max-w-7xl w-full mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
-        
+
         {/* Left Side: Google Form Embed (Zigzag from Hero) */}
         <div className="w-full flex justify-center order-2 lg:order-1">
           <Reveal delay={0.2} className="w-full">
@@ -50,7 +50,7 @@ export default function AutomationDemo() {
           <Reveal delay={0.2} className="w-full">
             <div className="bg-[var(--muted)]/10 border border-[var(--border)] rounded-2xl p-8 max-w-lg mx-auto lg:mx-0 shadow-sm backdrop-blur-sm relative overflow-hidden group mt-6">
               <div className="absolute inset-0 bg-gradient-to-br from-[var(--muted)]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-              
+
               <div className="relative z-10 flex flex-col lg:items-start items-center">
                 <p className="text-[var(--muted-foreground)] leading-relaxed font-light text-lg">
                   Fill out the form with your active email and a dummy project. Within 60 seconds, my automation workflow will log your entry and send a highly personalized confirmation email straight to your inbox.

@@ -21,8 +21,10 @@ export default function Footer() {
       <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center md:items-start gap-10 md:gap-0">
         
         <div className="text-center md:text-left space-y-4 w-full md:w-auto flex flex-col items-center md:items-start">
-          <Link href="/" className="text-2xl font-bold text-[var(--foreground)] tracking-tight flex items-center gap-1.5">
-            Carlos<span className="text-[var(--muted-foreground)]">/ Dev</span>
+          <Link href="/" className="text-2xl font-bold text-[var(--foreground)] tracking-tight flex items-center">
+            <span className="text-[var(--foreground)]">Carlos</span>
+            <span className="text-blue-500">.</span>
+            <span className="text-[var(--muted-foreground)]">dev</span>
           </Link>
           <p className="text-sm max-w-xs mx-auto md:mx-0 leading-relaxed font-light text-[var(--muted-foreground)]">
             Building digital experiences with code and creativity.

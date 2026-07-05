@@ -62,10 +62,11 @@ export default function Navbar() {
         
         <Link
           href="/"
-          className="text-xl font-bold cursor-pointer relative group z-50 flex items-center gap-2"
+          className="text-xl font-bold cursor-pointer relative group z-50 flex items-center tracking-tight"
         >
           <span className="text-[var(--foreground)]">Carlos</span>
-          <span className="text-[var(--muted-foreground)]">/ Dev</span>
+          <span className="text-blue-500">.</span>
+          <span className="text-[var(--muted-foreground)]">dev</span>
         </Link>
 
         {/* Desktop Navigation */}
