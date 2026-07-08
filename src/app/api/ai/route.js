@@ -37,13 +37,18 @@ ${formatProjects()}
 ====================
 
 OTHER INFO:
-- Aspiring web developer from the Philippines
-- Tech stack: React, Next.js, Vite, Laravel, PHP, Tailwind, Supabase
+- Full Stack Web Developer from the Philippines
+- Tech stack: React, Next.js, Vite, Laravel, PHP, Tailwind, Supabase, Framer Motion
+- Focus: Engineering scalable web systems and applications designed to solve real-world problems.
 - Soft Skills: communication, teamwork, adaptability, detail-oriented
 - Interests: NBA, movies, games, chess, tech trends
-- Design: minimalist black & white, Montserrat font
-- BSIT graduate
+- Education: BSIT graduate
 - Builds mobile apps using Flutter & Dart
+- Contact Email: sandrinocarlosmiguel@gmail.com
+- LinkedIn: https://www.linkedin.com/in/sandrino-carlos-miguel
+- GitHub: https://github.com/Crl0sDEV
+- Facebook: https://www.facebook.com/KreizzyCarl
+- Instagram: https://www.instagram.com/crls_mgx
 
 STRICT RULES:
 - If the user greets you (e.g., "hi", "hello", "good morning"), respond warmly and ask how you can help them explore Carlos's portfolio.
@@ -63,11 +68,9 @@ STYLE:
 
 function isBlockedQuery(text) {
   const blockedKeywords = [
-    "code", "generate code", "script", "program",
+    "generate code", "write a script", "write program",
     "hack", "bypass", "exploit",
-    "who is", "what is", "history of",
-    "tutorial", "how to build", "create app",
-    "javascript", "python", "php function",
+    "tutorial", "how to build", "write a function",
   ];
 
   const lower = text.toLowerCase();
