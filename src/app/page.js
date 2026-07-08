@@ -62,13 +62,13 @@ export default function Home() {
             </Reveal>
 
             <Reveal>
-              <h1 className="text-3xl md:text-5xl font-bold tracking-tight mb-4 leading-tight">
-                <span className="inline-flex items-center gap-3">
-                  <span className="text-[var(--foreground)]">
+              <h1 className="text-3xl md:text-5xl font-bold tracking-tight mb-4 leading-tight w-full">
+                <div className="flex flex-wrap items-center justify-center lg:justify-start gap-2 md:gap-3">
+                  <span className="text-[var(--foreground)] text-center lg:text-left">
                     Carlos Miguel Sandrino
                   </span>
-                  <BadgeCheck className="w-8 h-8 md:w-10 md:h-10 text-blue-500 fill-blue-500/20" />
-                </span>
+                  <BadgeCheck className="w-7 h-7 md:w-10 md:h-10 text-blue-500 fill-blue-500/20 shrink-0" />
+                </div>
               </h1>
             </Reveal>
 
@@ -86,28 +86,28 @@ export default function Home() {
             </Reveal>
 
             <Reveal delay={0.5}>
-              <div className="flex flex-wrap items-center justify-center lg:justify-start gap-4">
+              <div className="flex flex-wrap items-center justify-center lg:justify-start gap-4 w-full">
+                <Link href="/contact" className="w-full sm:w-auto">
+                  <motion.button
+                    whileHover={{ scale: 1.03 }}
+                    whileTap={{ scale: 0.97 }}
+                    className="w-full sm:w-auto flex items-center justify-center gap-3 px-8 py-4 rounded-xl bg-blue-600 text-white font-bold shadow-[0_0_20px_rgba(37,99,235,0.3)] transition-all hover:bg-blue-700 hover:shadow-[0_0_25px_rgba(37,99,235,0.5)]"
+                  >
+                    <Mail className="w-5 h-5" />
+                    <span>Hire Me</span>
+                  </motion.button>
+                </Link>
+
                 <motion.a
                   href="/RESUME-SANDRINO_CARLOS_MIGUEL.pdf"
                   download
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
-                  className="group inline-flex items-center gap-3 px-8 py-4 rounded-xl bg-[var(--foreground)] text-[var(--background)] font-medium shadow-md transition-all hover:opacity-90"
+                  className="w-full sm:w-auto flex items-center justify-center gap-3 px-8 py-4 rounded-xl border border-[var(--border)] bg-[var(--muted)]/20 text-[var(--foreground)] font-medium hover:bg-[var(--muted)] hover:border-[var(--muted-foreground)]/50 transition-all"
                 >
                   <Download className="w-5 h-5" />
                   <span>Download Resume</span>
                 </motion.a>
-
-                <Link href="/contact">
-                  <motion.button
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                    className="inline-flex items-center gap-3 px-8 py-4 rounded-xl border border-[var(--border)] bg-transparent text-[var(--foreground)] font-medium hover:bg-[var(--muted)] hover:border-[var(--muted-foreground)]/50 transition-all"
-                  >
-                    <Mail className="w-5 h-5" />
-                    <span>Contact</span>
-                  </motion.button>
-                </Link>
               </div>
             </Reveal>
 
