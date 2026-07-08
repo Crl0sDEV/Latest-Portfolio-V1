@@ -88,7 +88,7 @@ export default function Home() {
             <Reveal delay={0.5}>
               <div className="flex flex-wrap items-center justify-center lg:justify-start gap-4">
                 <motion.a
-                  href="/SANDRINO_CARLOS_MIGUEL.pdf"
+                  href="/RESUME-SANDRINO_CARLOS_MIGUEL.pdf"
                   download
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
